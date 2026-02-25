@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pat's CV Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #141414;
+  --ink-mid: #3a3a3a;
+  --ink-soft: #6e6e6e;
+  --ink-faint: #a0a0a0;
+  --paper: #faf9f7;
+  --paper-warm: #f3f0ea;
+  --paper-mid: #e8e3d9;
+  --line: #ddd8ce;
+  --accent: #b84c1e;
+  --accent-light: #e8836a;
+  --accent-bg: #fdf2ee;
+  --blue: #1e4d8c;
+  --blue-light: #d4e4f7;
+  --green: #1e6b45;
+  --green-light: #d4ede2;
+  --amber: #a06820;
+  --amber-light: #fdf0d4;
+  --white: #ffffff;
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.07);
+  --shadow: 0 3px 16px rgba(0,0,0,0.09);
+  --shadow-lg: 0 8px 36px rgba(0,0,0,0.13);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:200;
+  height: 56px;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+  border-bottom: 2px solid var(--accent);
+}
+.nav-brand {
+  font-family: 'Libre Baskerville', serif;
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.nav-brand span { color: var(--accent-light); }
+.nav-menu { display:flex; gap:0; list-style:none; }
+.nav-menu a {
+  display: block;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.75rem;
+  border-radius: 3px;
+  transition: color 0.15s, background 0.15s;
+}
+.nav-menu a:hover { color:#fff; background:rgba(255,255,255,0.08); }
+.nav-progress {
+  position: absolute; bottom:0; left:0;
+  height: 2px; background: var(--accent-light);
+  transition: width 0.3s;
+  width: 0%;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 9rem 2rem 5rem;
+  background: var(--ink);
+  position: relative; overflow: hidden;
+  min-height: 88vh;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-noise {
+  position: absolute; inset: 0; opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+.hero-stripe {
+  position: absolute; top:0; right:0;
+  width: 38%; height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(184,76,30,0.06) 100%);
+  border-left: 1px solid rgba(184,76,30,0.15);
+}
+.hero-inner { position:relative; z-index:1; max-width:780px; }
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(184,76,30,0.18);
+  border: 1px solid rgba(184,76,30,0.35);
+  color: var(--accent-light);
+  font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.3rem 0.85rem;
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+  color: var(--white);
+  line-height: 1.1;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent-light);
+}
+.hero-sub {
+  color: rgba(255,255,255,0.5);
+  font-size: 1rem;
+  max-width: 500px;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+.hero-perspectives {
+  display: flex; flex-wrap: wrap; gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+.perspective-badge {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 0.5rem 0.9rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.65);
+  font-weight: 400;
+}
+.perspective-badge .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+}
+.dot-red { background: #e85c3a; }
+.dot-blue { background: #4a90d9; }
+.dot-green { background: #3ab87a; }
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.9rem; font-weight: 600;
+  padding: 0.8rem 1.75rem;
+  border-radius: 3px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(184,76,30,0.35);
+}
+.hero-cta:hover { background: #d05822; transform: translateY(-2px); }
+.hero-stat-row {
+  display: flex; gap: 2.5rem; margin-top: 3.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 2rem;
+  flex-wrap: wrap;
+}
+.hero-stat-val {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1.75rem; font-weight: 700;
+  color: var(--accent-light);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.hero-stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.38); font-weight: 400; }
+
+/* ── SECTIONS ── */
+.chapter {
+  padding: 5.5rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.chapter:nth-child(even) { background: var(--white); }
+.chapter-inner { max-width: 900px; margin: 0 auto; }
+
+.chapter-label {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.chapter-label::before {
+  content: '';
+  display: inline-block;
+  width: 18px; height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.chapter-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 0.65rem;
+  font-weight: 700;
+}
+.chapter-intro {
+  color: var(--ink-soft);
+  font-size: 0.93rem;
+  max-width: 640px;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+/* ── VOICE CARDS (recruiter/HM/HoT) ── */
+.voice-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-sm);
+}
+.voice-card {
+  background: var(--white);
+  padding: 1.5rem;
+}
+.voice-role {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+.voice-icon {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+.voice-recruiter .voice-icon { background: #fde8e8; }
+.voice-recruiter .voice-role { color: #c0392b; }
+.voice-talent .voice-icon { background: #dbeafe; }
+.voice-talent .voice-role { color: var(--blue); }
+.voice-hm .voice-icon { background: #d1fae5; }
+.voice-hm .voice-role { color: var(--green); }
+.voice-card p {
+  font-size: 0.86rem;
+  line-height: 1.7;
+  color: var(--ink-mid);
+}
+.voice-card strong { color: var(--ink); }
+
+/* ── RULE CARDS ── */
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.rule-card {
+  border-radius: 8px;
+  padding: 1.4rem;
+  border: 1px solid transparent;
+}
+.rule-card.do {
+  background: var(--green-light);
+  border-color: #a7dfbf;
+}
+.rule-card.dont {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+.rule-card.warn {
+  background: var(--amber-light);
+  border-color: #fcd694;
+}
+.rule-card.info {
+  background: var(--blue-light);
+  border-color: #a3c4eb;
+}
+.rule-card-label {
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.rule-card.do .rule-card-label { color: var(--green); }
+.rule-card.dont .rule-card-label { color: #c0392b; }
+.rule-card.warn .rule-card-label { color: var(--amber); }
+.rule-card.info .rule-card-label { color: var(--blue); }
+.rule-card h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--ink); }
+.rule-card p { font-size: 0.82rem; line-height: 1.65; color: var(--ink-mid); }
+
+/* ── PITFALL LIST ── */
+.pitfall-list { display: flex; flex-direction: column; gap: 0.85rem; }
+.pitfall-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 3px solid #e74c3c;
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+.pitfall-icon { font-size: 1.1rem; flex-shrink:0; margin-top: 0.1rem; }
+.pitfall-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; color: var(--ink); }
+.pitfall-item p { font-size: 0.82rem; line-height: 1.6; color: var(--ink-soft); }
+.pitfall-fix {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--green);
+  font-weight: 500;
+}
+.pitfall-fix::before { content: '✓ Fix: '; font-weight: 700; }
+
+/* ── ATS SECTION ── */
+.ats-explainer {
+  background: var(--ink);
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.88rem;
+  line-height: 1.75;
+}
+.ats-explainer h3 {
+  font-family: 'Libre Baskerville', serif;
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+.ats-explainer strong { color: var(--accent-light); }
+.ats-flow {
+  display: flex; align-items: center; gap: 0;
+  margin: 1.5rem 0; flex-wrap: wrap;
+}
+.ats-step {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 0.75rem 1.1rem;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.75);
+  text-align: center;
+  min-width: 110px;
+  flex: 1;
+}
+.ats-step strong { display: block; font-size: 0.72rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.3rem; }
+.ats-arrow { color: var(--accent-light); font-size: 1.1rem; padding: 0 0.4rem; flex-shrink:0; }
+
+/* ── FORMATS SECTION ── */
+.formats-tabs {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.format-tab {
+  padding: 0.4rem 1rem;
+  border-radius: 3px;
+  font-size: 0.8rem; font-weight: 600;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--ink-soft);
+}
+.format-tab.active {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+.format-panel { display: none; }
+.format-panel.active { display: block; }
+.format-anatomy {
+  display: flex; gap: 0; flex-wrap: wrap;
+  border: 1px solid var(--line);
+  border-radius: 8px; overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+.anatomy-block {
+  flex: 1; min-width: 120px;
+  padding: 1rem;
+  border-right: 1px solid var(--line);
+  background: var(--white);
+}
+.anatomy-block:last-child { border-right: none; }
+.anatomy-letter {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--accent);
+  line-height: 1; margin-bottom: 0.25rem;
+}
+.anatomy-word { font-size: 0.8rem; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; }
+.anatomy-hint { font-size: 0.75rem; color: var(--ink-soft); line-height: 1.5; }
+.format-example-box {
+  background: var(--paper-warm);
+  border: 1px solid var(--paper-mid);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.87rem; line-height: 1.7;
+  color: var(--ink-mid);
+  font-style: italic;
+}
+.format-desc { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 1rem; }
+.format-when {
+  display: inline-block;
+  background: var(--blue-light);
+  color: var(--blue);
+  font-size: 0.75rem; font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+}
+
+/* ── COMPARISON ── */
+.compare-pair { margin-bottom: 1.75rem; }
+.compare-pair-label {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-faint); margin-bottom: 0.6rem;
+}
+.compare-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+}
+@media(max-width:560px) { .compare-row { grid-template-columns: 1fr; } }
+.compare-cell {
+  border-radius: 7px; padding: 1.1rem 1.25rem;
+  font-size: 0.86rem; line-height: 1.65;
+}
+.compare-cell.bad {
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  color: #7f1d1d;
+}
+.compare-cell.good {
+  background: #f0fdf6;
+  border: 1px solid #86efac;
+  color: #14532d;
+}
+.compare-cell-label {
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  margin-bottom: 0.5rem; opacity: 0.65;
+}
+.compare-why {
+  font-size: 0.77rem; color: var(--ink-soft);
+  margin-top: 0.4rem; padding-top: 0.4rem;
+  border-top: 1px solid var(--line);
+  font-style: italic;
+}
+
+/* ── VERB BANK ── */
+.verb-search {
+  width: 100%; padding: 0.7rem 1rem;
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  background: var(--white);
+  margin-bottom: 1.5rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.verb-search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(184,76,30,0.08); }
+.verb-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;
+}
+.verb-cat {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.1rem;
+  box-shadow: var(--shadow-sm);
+}
+.verb-cat-hd {
+  font-size: 0.7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.09em;
+  color: var(--accent);
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.verb-pills { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.vpill {
+  background: var(--paper-warm);
+  color: var(--ink-mid);
+  border: 1px solid var(--paper-mid);
+  font-size: 0.74rem; font-weight: 500;
+  padding: 0.18rem 0.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.12s;
+  user-select: none;
+}
+.vpill:hover, .vpill.copied { background: var(--accent); color: #fff; border-color: var(--accent); }
+.vpill.hidden { display: none; }
+.vpill.avoid { border-color: #fecaca; background: #fff5f5; color: #9b1c1c; text-decoration: line-through; opacity: 0.6; cursor: default; }
+
+/* ── STRUCTURE GUIDE ── */
+.structure-list {
+  display: flex; flex-direction: column; gap: 0.75rem;
+  counter-reset: struct;
+}
+.struct-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1.1rem 1.25rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s;
+}
+.struct-item:hover { box-shadow: var(--shadow); }
+.struct-num {
+  width: 32px; height: 32px; flex-shrink:0;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.85rem; font-weight: 700;
+  margin-top: 0.1rem;
+}
+.struct-item-title { font-weight: 600; font-size: 0.92rem; color: var(--ink); margin-bottom: 0.25rem; }
+.struct-item-desc { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.65; }
+.struct-item-tip {
+  display: inline-block; margin-top: 0.4rem;
+  font-size: 0.75rem; color: var(--amber);
+  font-weight: 500;
+}
+
+/* ── QUANTIFY SECTION ── */
+.quant-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;
+}
+.quant-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 8px 8px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+.quant-card h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--ink); }
+.quant-card ul { list-style: none; padding: 0; }
+.quant-card ul li {
+  font-size: 0.8rem; color: var(--ink-soft); line-height: 1.7;
+  padding-left: 1rem; position: relative;
+}
+.quant-card ul li::before { content:'→'; position:absolute; left:0; color:var(--accent); font-size:0.7rem; top:0.15rem; }
+
+/* ── SUMMARY BUILDER ── */
+.summary-formula {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--ink);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+.sf-block {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  padding: 0.4rem 0.85rem;
+  border-radius: 4px;
+  font-size: 0.82rem; font-weight: 500;
+}
+.sf-plus { color: rgba(255,255,255,0.3); font-size: 1rem; }
+
+/* ── TEXTAREA FIELDS ── */
+.field-group { margin-bottom: 1rem; }
+label.field-label {
+  display: block;
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+textarea, input[type="text"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.87rem;
+  color: var(--ink);
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  line-height: 1.65;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+textarea { min-height: 90px; }
+textarea:focus, input[type="text"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(184,76,30,0.08);
+}
+.field-hint { font-size: 0.74rem; color: var(--ink-faint); margin-top: 0.25rem; font-style: italic; }
+.bullet-workspace {
+  background: var(--paper-warm);
+  border: 1px solid var(--paper-mid);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.workspace-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 1rem; color: var(--ink); display: flex; align-items: center; gap: 0.5rem; }
+.action-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; border: none; transition: all 0.15s;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: #c85520; }
+.btn-secondary { background: var(--paper-mid); color: var(--ink-mid); }
+.btn-secondary:hover { background: var(--line); }
+.btn-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
+
+/* ── SO-WHAT TEST ── */
+.sowhat-box {
+  background: linear-gradient(135deg, var(--ink) 0%, #2a1f3d 100%);
+  border-radius: 10px; padding: 2rem;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 2rem;
+}
+.sowhat-box h3 {
+  font-family: 'Libre Baskerville', serif;
+  color: #fff; font-size: 1.1rem; margin-bottom: 0.75rem;
+}
+.sowhat-questions { list-style: none; padding:0; display: flex; flex-direction: column; gap: 0.5rem; }
+.sowhat-questions li {
+  display: flex; gap: 0.75rem; align-items: flex-start;
+  font-size: 0.86rem; line-height: 1.6;
+}
+.sowhat-q-num {
+  width: 22px; height: 22px; flex-shrink:0;
+  background: rgba(184,76,30,0.4);
+  border: 1px solid rgba(184,76,30,0.6);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem; font-weight: 700;
+  color: var(--accent-light);
+  margin-top: 0.1rem;
+}
+
+/* ── AI TOOLS ── */
+.ai-tools-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;
+}
+.ai-tool-card {
+  background: var(--ink);
+  border-radius: 10px;
+  padding: 1.75rem;
+  color: #fff;
+  position: relative; overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.ai-tool-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.ai-tool-num {
+  position: absolute; top: 1.25rem; right: 1.5rem;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 3rem; font-weight: 700;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+}
+.ai-tool-tag { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-light); margin-bottom: 0.6rem; }
+.ai-tool-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+.ai-tool-card p { font-size: 0.83rem; color: rgba(255,255,255,0.5); line-height: 1.65; margin-bottom: 1.25rem; }
+.ai-tool-card ol { padding-left: 1rem; margin-bottom: 1.25rem; }
+.ai-tool-card ol li { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+.ai-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--accent);
+  color: #fff; text-decoration: none;
+  font-size: 0.82rem; font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.ai-link:hover { background: #c85520; }
+
+/* ── GAP / TRANSITION ── */
+.scenario-tabs { display:flex; gap: 0.5rem; flex-wrap:wrap; margin-bottom: 1.25rem; }
+.s-tab {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem; font-weight: 600;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--ink-soft);
+}
+.s-tab.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+.s-panel { display: none; }
+.s-panel.active { display: block; }
+.scenario-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+.scenario-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--blue); }
+.scenario-card p, .scenario-card li { font-size: 0.86rem; line-height: 1.7; color: var(--ink-mid); margin-bottom: 0.5rem; }
+.scenario-card ul, .scenario-card ol { padding-left: 1.25rem; }
+
+/* ── CHECKLIST ── */
+.checklist { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.checklist li {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  font-size: 0.88rem; line-height: 1.6; color: var(--ink-mid);
+}
+.check-box {
+  width: 18px; height: 18px; flex-shrink:0;
+  border: 2px solid var(--line);
+  border-radius: 3px;
+  background: var(--white);
+  cursor: pointer;
+  margin-top: 0.15rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+  font-size: 0.7rem;
+}
+.check-box.checked { background: var(--green); border-color: var(--green); color: white; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  font-size: 0.78rem; line-height: 1.8;
+}
+footer a { color: var(--accent-light); text-decoration: none; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 1.5rem; right: 1.5rem;
+  background: var(--green);
+  color: #fff;
+  padding: 0.6rem 1.1rem;
+  border-radius: 5px;
+  font-size: 0.82rem; font-weight: 500;
+  opacity: 0; transform: translateY(12px);
+  transition: all 0.25s;
+  z-index: 999;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* ── DIVIDER ── */
+.divider { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px) {
+  nav { padding: 0 1rem; }
+  .nav-menu { display: none; }
+  .chapter { padding: 3.5rem 1rem; }
+  .hero { padding: 7rem 1rem 3.5rem; }
+  .voice-strip { grid-template-columns: 1fr; }
+  .ats-flow { flex-direction: column; }
+  .ats-arrow { transform: rotate(90deg); align-self: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="top-nav">
+  <div class="nav-brand">Pat's <span>CV Guide</span></div>
+  <ul class="nav-menu">
+    <li><a href="#structure">Structure</a></li>
+    <li><a href="#ats">ATS</a></li>
+    <li><a href="#bullets">Bullets</a></li>
+    <li><a href="#formats">Formats</a></li>
+    <li><a href="#verbs">Verbs</a></li>
+    <li><a href="#quantify">Numbers</a></li>
+    <li><a href="#pitfalls">Pitfalls</a></li>
+    <li><a href="#scenarios">Scenarios</a></li>
+    <li><a href="#workshop">Workshop</a></li>
+  </ul>
+  <div class="nav-progress" id="nav-progress"></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-stripe"></div>
+  <div class="hero-inner">
+    <div class="hero-kicker">CV Writing Guide</div>
+    <h1>Write the CV that gets<br>you in the <em>room.</em></h1>
+    <p class="hero-sub">Everything you need to craft a CV that clears ATS filters, catches a recruiter's eye in 6 seconds, and convinces a hiring manager you're the one.</p>
+    <div class="hero-perspectives">
+      <div class="perspective-badge"><div class="dot dot-red"></div> Senior Recruiter perspective</div>
+      <div class="perspective-badge"><div class="dot dot-blue"></div> Head of Talent perspective</div>
+      <div class="perspective-badge"><div class="dot dot-green"></div> Hiring Manager perspective</div>
+    </div>
+    <a href="#structure" class="hero-cta">Start the Guide →</a>
+    <div class="hero-stat-row">
+      <div>
+        <div class="hero-stat-val">6s</div>
+        <div class="hero-stat-label">Average recruiter first scan</div>
+      </div>
+      <div>
+        <div class="hero-stat-val">75%</div>
+        <div class="hero-stat-label">CVs rejected by ATS before human eyes</div>
+      </div>
+      <div>
+        <div class="hero-stat-val">3×</div>
+        <div class="hero-stat-label">More callbacks with quantified bullets</div>
+      </div>
+      <div>
+        <div class="hero-stat-val">250+</div>
+        <div class="hero-stat-label">Applicants per corporate job posting</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 1. STRUCTURE -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="chapter" id="structure">
+  <div class="chapter-inner">
+    <div class="chapter-label">Section 1</div>
+    <h2 class="chapter-title">Structure & Section Order</h2>
+    <p class="chapter-intro">How you arrange your CV is a strategic decision. Recruiters scan in an F-pattern — top-left first, then diagonally. Put your most relevant, impressive content in the first third of the page.</p>
+
+    <div class="voice-strip">
+      <div class="voice-card voice-recruiter">
+        <div class="voice-role"><div class="voice-icon">🔍</div>Senior Recruiter</div>
+        <p><strong>I scan your CV in under 10 seconds</strong> before deciding whether to keep reading. If I can't find your current title, company, and one impressive outcome in that first glance — you're in the reject pile. Put the most relevant signal at the very top.</p>
+      </div>
+      <div class="voice-card voice-talent">
+        <div class="voice-role"><div class="voice-icon">📋</div>Head of Talent</div>
+        <p><strong>Section order signals what you value.</strong> Experienced hires should lead with a summary and work history — not education. Recent grads can flip that. And <strong>never</strong> start with an "Objective" statement; it's about what you want, not what you offer.</p>
+      </div>
+      <div class="voice-card voice-hm">
+        <div class="voice-role"><div class="voice-icon">👔</div>Hiring Manager</div>
+        <p><strong>I'm looking for trajectory.</strong> I want to see that your career is moving in a clear direction and that each role built on the last. Your structure should tell a story of growth, not just list jobs. <strong>Show me you're ready for this next step.</strong></p>
+      </div>
+    </div>
+
+    <div class="structure-list">
+      <div class="struct-item">
+        <div class="struct-num">1</div>
+        <div>
+          <div class="struct-item-title">Header — Name, Title, Contact</div>
+          <div class="struct-item-desc">Full name (large), your professional title (match the job posting), email, phone, LinkedIn URL, city/country. No photo, no age, no marital status. Keep it clean and scannable.</div>
+          <span class="struct-item-tip">⚠️ Use a professional email. yourname@gmail.com, not coolkid99@hotmail.com</span>
+        </div>
+      </div>
+      <div class="struct-item">
+        <div class="struct-num">2</div>
+        <div>
+          <div class="struct-item-title">Professional Summary (2–4 lines)</div>
+          <div class="struct-item-desc">This is your elevator pitch. One sentence on who you are, one on your key strength, one on what you're seeking. Tailor this for every single job application. This is the most-read part of your CV.</div>
+          <span class="struct-item-tip">💡 Never write "I am a hardworking professional seeking..." — use third-person positioning: "Product leader with 7 years..."</span>
+        </div>
+      </div>
+      <div class="struct-item">
+        <div class="struct-num">3</div>
+        <div>
+          <div class="struct-item-title">Work Experience (reverse chronological)</div>
+          <div class="struct-item-desc">Most recent role first. For each role: company, title, dates, location, then 3–6 bullet points. Focus on impact, not duties. Use strong action verbs. Include at least one metric per role.</div>
+          <span class="struct-item-tip">💡 Spend 70% of your CV real estate on your most recent 2 roles</span>
+        </div>
+      </div>
+      <div class="struct-item">
+        <div class="struct-num">4</div>
+        <div>
+          <div class="struct-item-title">Skills</div>
+          <div class="struct-item-desc">Keep it concise and relevant. Split into hard skills (tools, languages, platforms) and soft competencies. Don't rate yourself with stars or bars — they're meaningless and waste space.</div>
+          <span class="struct-item-tip">⚠️ Only include skills you can speak to confidently in an interview</span>
+        </div>
+      </div>
+      <div class="struct-item">
+        <div class="struct-num">5</div>
+        <div>
+          <div class="struct-item-title">Education</div>
+          <div class="struct-item-desc">Degree, institution, graduation year, notable achievements. If you graduated more than 5 years ago, move this after Work Experience. If you're a recent grad, keep it near the top.</div>
+          <span class="struct-item-tip">💡 Include GPA only if it's strong (3.5+) and you're early-career</span>
+        </div>
+      </div>
+      <div class="struct-item">
+        <div class="struct-num">6</div>
+        <div>
+          <div class="struct-item-title">Additional (Projects, Certifications, Languages)</div>
+          <div class="struct-item-desc">Side projects, freelance work, relevant certifications, languages spoken. Only include if directly relevant to the role. This section can be powerful for career changers or recent grads.</div>
+          <span class="struct-item-tip">💡 A well-described side project can outweigh 2 years of irrelevant experience</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="rules-grid" style="margin-top:1.5rem">
+      <div class="rule-card do">
+        <div class="rule-card-label">✓ Do</div>
+        <h4>1–2 pages maximum</h4>
+        <p>1 page for &lt;10 years experience. 2 pages for senior roles. Academic CVs are the exception. Every line must earn its place.</p>
+      </div>
+      <div class="rule-card do">
+        <div class="rule-card-label">✓ Do</div>
+        <h4>Consistent formatting throughout</h4>
+        <p>Same font, same date format (Jan 2022 – Mar 2024), same bullet style. Inconsistency signals carelessness.</p>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-card-label">✗ Don't</div>
+        <h4>Include "References available on request"</h4>
+        <p>Everyone knows. It just wastes a line. Only include references when specifically asked.</p>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-card-label">✗ Don't</div>
+        <h4>Include a photo (in most markets)</h4>
+        <p>US, UK, Canada: never. Some European countries expect it. Always check the local norm for the market you're applying in.</p>
+      </div>
+      <div class="rule-card warn">
+        <div class="rule-card-label">⚠ Watch out</div>
+        <h4>File format matters</h4>
+        <p>Always submit as PDF unless the job posting says otherwise. Word docs can reformat unexpectedly. Name your file: Firstname_Lastname_CV.pdf</p>
+      </div>
+      <div class="rule-card info">
+        <div class="rule-card-label">ℹ Tip</div>
+        <h4>Use standard fonts</h4>
+        <p>Calibri, Garamond, Georgia, Arial, Helvetica. 10–12pt body, 14–16pt name. Fancy fonts often break ATS parsing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 2. ATS -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="chapter" id="ats">
+  <div class="chapter-inner">
+    <div class="chapter-label">Section 2</div>
+    <h2 class="chapter-title">Beating the ATS Filter</h2>
+    <p class="chapter-intro">Most large companies use Applicant Tracking Systems. Your CV is scanned by software before a human ever reads it. Fail the ATS, and you're invisible — even if you're the perfect candidate.</p>
+
+    <div class="ats-explainer">
+      <h3>How ATS works</h3>
+      <p>An ATS parses your CV, extracts information, and scores it against the job description. <strong>It looks for keyword matches, section headers it recognizes, and structured data it can read.</strong> Fancy tables, columns, icons, and graphics often break ATS parsing entirely — your information disappears.</p>
+      <div class="ats-flow">
+        <div class="ats-step"><strong>You submit</strong>PDF or Word CV</div>
+        <div class="ats-arrow">→</div>
+        <div class="ats-step"><strong>ATS parses</strong>Extracts text, sections, data</div>
+        <div class="ats-arrow">→</div>
+        <div class="ats-step"><strong>ATS scores</strong>Keywords vs. job description</div>
+        <div class="ats-arrow">→</div>
+        <div class="ats-step"><strong>Threshold</strong>Pass → human sees it. Fail → rejected.</div>
+        <div class="ats-arrow">→</div>
+        <div class="ats-step"><strong>Recruiter</strong>6-second scan of shortlist</div>
+      </div>
+    </div>
+
+    <div class="voice-strip">
+      <div class="voice-card voice-recruiter">
+        <div class="voice-role"><div class="voice-icon">🔍</div>Senior Recruiter</div>
+        <p>I've seen brilliant candidates eliminated because <strong>their CV was built in Canva</strong> with two-column layouts and icons. Beautiful to look at — invisible to our ATS. <strong>Simple, clean, single-column beats fancy every time</strong> for online applications.</p>
+      </div>
+      <div class="voice-card voice-talent">
+        <div class="voice-role"><div class="voice-icon">📋</div>Head of Talent</div>
+        <p>The fix is simple: <strong>copy the exact language from the job posting.</strong> If they say "cross-functional stakeholder management," don't write "worked with different teams." Mirror their vocabulary. <strong>The ATS is literally counting keyword matches.</strong></p>
+      </div>
+      <div class="voice-card voice-hm">
+        <div class="voice-role"><div class="voice-icon">👔</div>Hiring Manager</div>
+        <p>I write the job description. When I later read CVs, <strong>I'm pattern-matching to the language I used.</strong> It's not gaming the system — it's communication. Show me you understand what we actually need by reflecting it back.</p>
+      </div>
+    </div>
+
+    <div class="rules-grid">
+      <div class="rule-card do">
+        <div class="rule-card-label">✓ ATS-Safe</div>
+        <h4>Single-column layout</h4>
+        <p>Multi-column designs confuse ATS parsers. Keep everything in one linear flow — name, then summary, then experience, etc.</p>
+      </div>
+      <div class="rule-card do">
+        <div class="rule-card-label">✓ ATS-Safe</div>
+        <h4>Standard section headers</h4>
+        <p>Use recognized headers: "Work Experience" not "Where I've Been." "Education" not "My Journey." ATS looks for known labels.</p>
+      </div>
+      <div class="rule-card do">
+        <div class="rule-card-label">✓ ATS-Safe</div>
+        <h4>Mirror the job posting's language</h4>
+        <p>Pull key phrases directly from the job description. Weave them naturally into your bullets and summary — don't just keyword-stuff at the bottom.</p>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-card-label">✗ ATS-Killer</div>
+        <h4>Tables, text boxes, columns</h4>
+        <p>ATS parsers often can't read content inside tables or text boxes. That skills table you think looks clean? It may be completely invisible.</p>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-card-label">✗ ATS-Killer</div>
+        <h4>Graphics, icons, progress bars</h4>
+        <p>Skill bars showing "Excel: ████░░" communicate nothing meaningful to a human and nothing at all to an ATS. Remove them.</p>
+      </div>
+      <div class="rule-card warn">
+        <div class="rule-card-label">⚠ Grey area</div>
+        <h4>Abbreviations without spelling out</h4>
+        <p>Write "Search Engine Optimization (SEO)" the first time — ATS may only know one version. Same for role titles, tools, and frameworks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 3. BULLETS -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="chapter" id="bullets">
+  <div class="chapter-inner">
+    <div class="chapter-label">Section 3</div>
+    <h2 class="chapter-title">Writing Powerful Bullets</h2>
+    <p class="chapter-intro">A CV bullet is not a job description. It's a proof point. Every bullet must answer: <em>what did you do, how did you do it, and why does it matter?</em></p>
+
+    <div class="sowhat-box">
+      <h3>The "So What?" Test</h3>
+      <p style="margin-bottom:1rem; font-size:0.86rem;">Before you submit any bullet, apply this filter. If you can't answer each question, the bullet isn't done yet.</p>
+      <ul class="sowhat-questions">
+        <li><div class="sowhat-q-num">1</div>What exactly did you do? (action + subject)</li>
+        <li><div class="sowhat-q-num">2</div>What was the size/scale of it? (team size, budget, user count, market size)</li>
+        <li><div class="sowhat-q-num">3</div>What was the result? (revenue, time saved, % improvement, award, new customers)</li>
+        <li><div class="sowhat-q-num">4</div>Who else benefited? (team, company, customers, industry)</li>
+        <li><div class="sowhat-q-num">5</div>Why does this matter to <em>this job?</em> (connect it to their needs)</li>
+      </ul>
+    </div>
+
+    <div class="voice-strip">
+      <div class="voice-card voice-recruiter">
+        <div class="voice-role"><div class="voice-icon">🔍</div>Senior Recruiter</div>
+        <p>The single biggest red flag I see? <strong>"Responsible for..."</strong> — it tells me what you were supposed to do, not what you actually accomplished. I want to see what <em>happened</em> because you showed up. Also: <strong>never write "I"</strong> in a CV bullet.</p>
+      </div>
+      <div class="voice-card voice-talent">
+        <div class="voice-role"><div class="voice-icon">📋</div>Head of Talent</div>
+        <p><strong>Each bullet should tie to a specific responsibility in the job posting.</strong> I stack-rank candidates by how many of our stated requirements they've demonstrably done before. If your bullets don't match our language, you're invisible — even if you've done the work.</p>
+      </div>
+      <div class="voice-card voice-hm">
+        <div class="voice-role"><div class="voice-icon">👔</div>Hiring Manager</div>
+        <p>I'm looking for <strong>proof of judgment, not just activity.</strong> Anyone can write "led meetings." Show me you made decisions, solved hard problems, and influenced outcomes. The best bullets make me think: <em>"This person has been in the trenches."</em></p>
+      </div>
+    </div>
+
+    <!-- COMPARISONS -->
+    <div class="compare-pair">
+      <div class="compare-pair-label">Passive vs. Active</div>
+      <div class="compare-row">
+        <div class="compare-cell bad"><div class="compare-cell-label">❌ Weak</div>Responsible for managing the social media accounts for the company.<div class="compare-why">Uses "responsible for" — says what you were supposed to do, not what you did. No metric, no outcome, no scale.</div></div>
+        <div class="compare-cell good"><div class="compare-cell-label">✓ Strong</div>Led team of 3 to execute a referral program across 4 social platforms, generating $50K in new revenue and 120 new customers in Q3.<div class="compare-why">Strong verb. Team size. Platform count. Two metrics. Time-bounded. Specific.</div></div>
+      </div>
+    </div>
+    <div class="compare-pair">
+      <div class="compare-pair-label">Generic vs. Specific</div>
+      <div class="compare-row">
+        <div class="compare-cell bad"><div class="compare-cell-label">❌ Weak</div>Led user research on our products.<div class="compare-why">What kind of research? How many users? What happened as a result? This tells me almost nothing.</div></div>
+        <div class="compare-cell good"><div class="compare-cell-label">✓ Strong</div>Synthesized qualitative research from 23 usability tests into 47 actionable tickets; worked with 4 engineers to confirm build meets 79 critical user specifications.<div class="compare-why">Method. Sample size. Output. Team size. Measurable acceptance criteria. This is a full story in one line.</div></div>
+      </div>
+    </div>
+    <div class="compare-pair">
+      <div class="compare-pair-label">Duty vs. Impact</div>
+      <div class="compare-row">
+        <div class="compare-cell bad"><div class="compare-cell-label">❌ Weak</div>Attended and contributed to weekly strategy meetings with the C-suite.<div class="compare-why">"Attended" is not an achievement. "Contributed" is vague. What changed because you were there?</div></div>
+        <div class="compare-cell good"><div class="compare-cell-label">✓ Strong</div>Presented weekly product metrics to CEO and 3 VPs; analysis directly shaped company's pivot to enterprise market, contributing to $1.2M ARR in 6 months.<div class="compare-why">Audience specified. Role clear. Causal link to business outcome. Metric with time frame.</div></div>
+      </div>
+    </div>
+    <div class="compare-pair">
+      <div class="compare-pair-label">Vague vs. Vivid</div>
+      <div class="compare-row">
+        <div class="compare-cell bad"><div class="compare-cell-label">❌ Weak</div>Helped improve the onboarding process which was not working well.<div class="compare-why">What was the problem? What did you do? What improved? "Helped" undersells you and "not working well" is too vague.</div></div>
+        <div class="compare-cell good"><div class="compare-cell-label">✓ Strong</div>Redesigned 6-step onboarding flow after analyzing 150 drop-off events; reduced time-to-activation from 14 days to 3, increasing 30-day retention by 22%.<div class="compare-why">Problem is clear. Scope is clear. Method is clear. Quantified before/after. Two distinct metrics.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 4. FORMATS -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="chapter" id="formats">
+  <div class="chapter-inner">
+    <div class="chapter-label">Section 4</div>
+    <h2 class="chapter-title">5 Proven Bullet Formats</h2>
+    <p class="chapter-intro">Different formats work for different stories. Pick based on what you want the reader to notice first: the result, the process, or your specific role.</p>
+
+    <div class="formats-tabs">
+      <button class="format-tab active" onclick="showFormat('xyz', this)">XYZ</button>
+      <button class="format-tab" onclick="showFormat('star', this)">STAR</button>
+      <button class="format-tab" onclick="showFormat('racr', this)">RACR</button>
+      <button class="format-tab" onclick="showFormat('rsi', this)">RSI</button>
+      <button class="format-tab" onclick="showFormat('ytw', this)">YTW</button>
+    </div>
+
+    <div class="format-panel active" id="fmt-xyz">
+      <div class="format-when">Best for: Results-first roles, technical achievements, measurable wins</div>
+      <p class="format-desc">Google's preferred format. Put the accomplishment first, then the metric, then the method. Recruiter-friendly because the most important thing — what you achieved — appears immediately.</p>
+      <div class="format-anatomy">
+        <div class="anatomy-block"><div class="anatomy-letter">X</div><div class="anatomy-word">Accomplished</div><div class="anatomy-hint">What you achieved — the verb + noun</div></div>
+        <div class="anatomy-block"><div class="anatomy-letter">Y</div><div class="anatomy-word">Measured by</div><div class="anatomy-hint">The number, %, $, volume that proves it</div></div>
+        <div class="anatomy-block"><div class="anatomy-letter">Z</div><div class="anatomy-word">By doing</div><div class="anatomy-hint">The method, tool, or approach you used</div></div>
+      </div>
+      <div class="format-example-box">"Reduced customer churn by 18% (Y) by redesigning the cancellation flow and adding 3 retention touchpoints (Z)."</div>
+    </div>
+
+    <div class="format-panel" id="fmt-star">
+      <div class="format-when">Best for: Complex projects, leadership stories, multi-step challenges</div>
+      <p class="format-desc">Classic storytelling arc. Slightly longer but builds narrative. Great for senior roles where context matters. Also used directly for behavioral interview answers.</p>
+      <div class="format-anatomy">
+        <div class="anatomy-block"><div class="anatomy-letter">S</div><div class="anatomy-word">Situation</div><div class="anatomy-hint">The context in one short clause</div></div>
+        <div class="anatomy-block"><div class="anatomy-letter">T</div><div class="anatomy-word">Task</div><div class="anatomy-hint">Your specific responsibility</div></div>
+        <div class="anatomy-block"><div class="anatomy-letter">A</div><div class="anatomy-word">Action</div><div class="anatomy-hint">What you specifically did</div></div>
+        <div class="anatomy-block"><div class="anatomy-letter">R</div><div class="anatomy-word">Result</div><div class="anatomy-hint">Quantified outcome</div></div>
+      </div>
+      <div class="format-example-box">"Hackathon with 40+ competing teams (S) — led a team of 3 (T) to build a new mobile interface for casual users (A); won 4th place company-wide and secured interest from 2 PMs for full productionization (R)."</div>
+    </div>
+
+    <div class="format-panel" id="fmt-racr">
+      <div class="format-when">Best for: When your result is the headline — lead with the win</div>
+      <p class="format-desc">Lead with the result for maximum impact. Then explain how. Then add context. Then close with a second-order result. Unusual structure = memorable.</p>
+      <div class="format-anatomy">
+        <div class="anatomy-block"><div class="anatomy-letter">R</div><div class="anatomy-word">Result first</div><div class="anatomy-hint">The impressive outcome — hook them</div></div>
+        <div class="anatomy-block"><div class="anatomy-letter">A</div><div class="anatomy-word">Action</div><div class="anatomy-hint">How you produced that result</div></div>
+        <div class="anatomy-block"><div class="anatomy-letter">C</div><div class="anatomy-word">Context</div><div class="anatomy-hint">Why it mattered / what it enabled</div></div>
+        <div class="anatomy-block"><div class="anatomy-letter">R</div><div class="anatomy-word">Result 2</div><div class="anatomy-hint">The downstream impact</div></div>
+      </div>
+      <div class="format-example-box">"Built a custom Tableau dashboard (R) by integrating Salesforce + GA4 data pipelines (A); gave the team real-time visibility into activation metrics (C), enabling a roadmap that grew DAU by 31% in one quarter (R)."</div>
+    </div>
+
+    <div class="format-panel" id="fmt-rsi">
+      <div class="format-when">Best for: Team projects where your personal contribution needs to stand out</div>
+      <p class="format-desc">Clarifies your individual role within a larger effort. Especially useful when the project success was collective but your specific contribution was distinct and strategic.</p>
+      <div class="format-anatomy">
+        <div class="anatomy-block"><div class="anatomy-letter">R</div><div class="anatomy-word">Role Played</div><div class="anatomy-hint">Your specific position in the work</div></div>
+        <div class="anatomy-block"><div class="anatomy-letter">S</div><div class="anatomy-word">Skills Used</div><div class="anatomy-hint">Methods, tools, competencies deployed</div></div>
+        <div class="anatomy-block"><div class="anatomy-letter">I</div><div class="anatomy-word">Impact</div><div class="anatomy-hint">Quantified business or human outcome</div></div>
+      </div>
+      <div class="format-example-box">"Led a 6-person scrum team (R) to deliver a market acquisition strategy using lean canvas and competitive analysis (S) for a Fortune 150 firm, opening a $14–28B hybrid cloud opportunity (I)."</div>
+    </div>
+
+    <div class="format-panel" id="fmt-ytw">
+      <div class="format-when">Best for: Leadership and management roles — shows ripple effect of your work</div>
+      <p class="format-desc">Demonstrates how your work cascaded outward — from personal action, to team impact, to company/world outcome. Powerful for senior and people-leadership roles.</p>
+      <div class="format-anatomy">
+        <div class="anatomy-block"><div class="anatomy-letter">Y</div><div class="anatomy-word">You</div><div class="anatomy-hint">What you personally did</div></div>
+        <div class="anatomy-block"><div class="anatomy-letter">T</div><div class="anatomy-word">Team</div><div class="anatomy-hint">How it impacted your team/function</div></div>
+        <div class="anatomy-block"><div class="anatomy-letter">W</div><div class="anatomy-word">World</div><div class="anatomy-hint">Long-term company or customer impact</div></div>
+      </div>
+      <div class="format-example-box">"Managed delivery for a cross-functional team of 8 across 3 time zones (Y), developing a customer acquisition playbook for EMEA Sales & Marketing (T), resulting in 10% quarterly customer acquisition growth and 2 new enterprise logos (W)."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 5. VERB BANK -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="chapter" id="verbs">
+  <div class="chapter-inner">
+    <div class="chapter-label">Section 5</div>
+    <h2 class="chapter-title">Action Verb Library</h2>
+    <p class="chapter-intro">Every bullet starts with a verb. Use each verb once across your entire CV. Strong verbs signal confidence and precision. Click any verb to copy it.</p>
+
+    <div class="voice-strip" style="margin-bottom:1.5rem">
+      <div class="voice-card voice-recruiter">
+        <div class="voice-role"><div class="voice-icon">🔍</div>Senior Recruiter</div>
+        <p>Avoid <strong>"spearheaded"</strong> — it's so overused by AI tools that it's become a red flag that you didn't write your own CV. Same with "synergized," "leveraged" (overused), and "passionate." I want to see <strong>specific, honest verbs.</strong></p>
+      </div>
+      <div class="voice-card voice-hm">
+        <div class="voice-role"><div class="voice-icon">👔</div>Hiring Manager</div>
+        <p>The verb tells me your <strong>level of ownership.</strong> "Contributed to" says you helped. "Led" says you owned it. "Architected" says you designed it from scratch. <strong>Be precise — and never overclaim.</strong> I will ask about every bullet in the interview.</p>
+      </div>
+    </div>
+
+    <input type="text" class="verb-search" id="verb-search-input" placeholder="Search verbs... (e.g. 'manage', 'create', 'analyze')" oninput="filterVerbs(this.value)">
+
+    <div class="verb-grid">
+      <div class="verb-cat">
+        <div class="verb-cat-hd">⚡ Executing</div>
+        <div class="verb-pills" id="vc-executing">
+          <span class="vpill" onclick="copyV(this)">Led</span>
+          <span class="vpill" onclick="copyV(this)">Executed</span>
+          <span class="vpill" onclick="copyV(this)">Delivered</span>
+          <span class="vpill" onclick="copyV(this)">Launched</span>
+          <span class="vpill" onclick="copyV(this)">Deployed</span>
+          <span class="vpill" onclick="copyV(this)">Completed</span>
+          <span class="vpill" onclick="copyV(this)">Implemented</span>
+          <span class="vpill" onclick="copyV(this)">Conducted</span>
+          <span class="vpill" onclick="copyV(this)">Directed</span>
+          <span class="vpill" onclick="copyV(this)">Resolved</span>
+          <span class="vpill" onclick="copyV(this)">Orchestrated</span>
+          <span class="vpill" onclick="copyV(this)">Sustained</span>
+          <span class="vpill" onclick="copyV(this)">Controlled</span>
+          <span class="vpill" onclick="copyV(this)">Reinforced</span>
+        </div>
+      </div>
+      <div class="verb-cat">
+        <div class="verb-cat-hd">👥 Leading People</div>
+        <div class="verb-pills" id="vc-leading">
+          <span class="vpill" onclick="copyV(this)">Mentored</span>
+          <span class="vpill" onclick="copyV(this)">Supervised</span>
+          <span class="vpill" onclick="copyV(this)">Trained</span>
+          <span class="vpill" onclick="copyV(this)">Coached</span>
+          <span class="vpill" onclick="copyV(this)">Motivated</span>
+          <span class="vpill" onclick="copyV(this)">Empowered</span>
+          <span class="vpill" onclick="copyV(this)">Inspired</span>
+          <span class="vpill" onclick="copyV(this)">Delegated</span>
+          <span class="vpill" onclick="copyV(this)">Unified</span>
+          <span class="vpill" onclick="copyV(this)">Briefed</span>
+          <span class="vpill" onclick="copyV(this)">Guided</span>
+          <span class="vpill" onclick="copyV(this)">Encouraged</span>
+        </div>
+      </div>
+      <div class="verb-cat">
+        <div class="verb-cat-hd">🔧 Improving</div>
+        <div class="verb-pills" id="vc-improving">
+          <span class="vpill" onclick="copyV(this)">Innovated</span>
+          <span class="vpill" onclick="copyV(this)">Streamlined</span>
+          <span class="vpill" onclick="copyV(this)">Overhauled</span>
+          <span class="vpill" onclick="copyV(this)">Modernized</span>
+          <span class="vpill" onclick="copyV(this)">Revamped</span>
+          <span class="vpill" onclick="copyV(this)">Optimized</span>
+          <span class="vpill" onclick="copyV(this)">Redesigned</span>
+          <span class="vpill" onclick="copyV(this)">Simplified</span>
+          <span class="vpill" onclick="copyV(this)">Refined</span>
+          <span class="vpill" onclick="copyV(this)">Revitalized</span>
+          <span class="vpill" onclick="copyV(this)">Corrected</span>
+          <span class="vpill" onclick="copyV(this)">Reengineered</span>
+        </div>
+      </div>
+      <div class="verb-cat">
+        <div class="verb-cat-hd">📊 Managing Resources</div>
+        <div class="verb-pills" id="vc-managing">
+          <span class="vpill" onclick="copyV(this)">Managed</span>
+          <span class="vpill" onclick="copyV(this)">Budgeted</span>
+          <span class="vpill" onclick="copyV(this)">Allocated</span>
+          <span class="vpill" onclick="copyV(this)">Procured</span>
+          <span class="vpill" onclick="copyV(this)">Secured</span>
+          <span class="vpill" onclick="copyV(this)">Audited</span>
+          <span class="vpill" onclick="copyV(this)">Tracked</span>
+          <span class="vpill" onclick="copyV(this)">Forecasted</span>
+          <span class="vpill" onclick="copyV(this)">Scheduled</span>
+          <span class="vpill" onclick="copyV(this)">Mitigated</span>
+          <span class="vpill" onclick="copyV(this)">Acquired</span>
+          <span class="vpill" onclick="copyV(this)">Conserved</span>
+        </div>
+      </div>
+      <div class="verb-cat">
+        <div class="verb-cat-hd">🤝 Building Relationships</div>
+        <div class="verb-pills" id="vc-relations">
+          <span class="vpill" onclick="copyV(this)">Coordinated</span>
+          <span class="vpill" onclick="copyV(this)">Liaised</span>
+          <span class="vpill" onclick="copyV(this)">Negotiated</span>
+          <span class="vpill" onclick="copyV(this)">Partnered</span>
+          <span class="vpill" onclick="copyV(this)">Advocated</span>
+          <span class="vpill" onclick="copyV(this)">Collaborated</span>
+          <span class="vpill" onclick="copyV(this)">Cultivated</span>
+          <span class="vpill" onclick="copyV(this)">Represented</span>
+          <span class="vpill" onclick="copyV(this)">Engaged</span>
+          <span class="vpill" onclick="copyV(this)">Integrated</span>
+          <span class="vpill" onclick="copyV(this)">Reconciled</span>
+        </div>
+      </div>
+      <div class="verb-cat">
+        <div class="verb-cat-hd">🧠 Strategic Thinking</div>
+        <div class="verb-pills" id="vc-strategy">
+          <span class="vpill" onclick="copyV(this)">Analyzed</span>
+          <span class="vpill" onclick="copyV(this)">Assessed</span>
+          <span class="vpill" onclick="copyV(this)">Devised</span>
+          <span class="vpill" onclick="copyV(this)">Formulated</span>
+          <span class="vpill" onclick="copyV(this)">Synthesized</span>
+          <span class="vpill" onclick="copyV(this)">Modeled</span>
+          <span class="vpill" onclick="copyV(this)">Validated</span>
+          <span class="vpill" onclick="copyV(this)">Interpreted</span>
+          <span class="vpill" onclick="copyV(this)">Identified</span>
+          <span class="vpill" onclick="copyV(this)">Predicted</span>
+          <span class="vpill" onclick="copyV(this)">Evaluated</span>
+        </div>
+      </div>
+      <div class="verb-cat">
+        <div class="verb-cat-hd">🎨 Creating & Building</div>
+        <div class="verb-pills" id="vc-creating">
+          <span class="vpill" onclick="copyV(this)">Designed</span>
+          <span class="vpill" onclick="copyV(this)">Developed</span>
+          <span class="vpill" onclick="copyV(this)">Conceptualized</span>
+          <span class="vpill" onclick="copyV(this)">Authored</span>
+          <span class="vpill" onclick="copyV(this)">Generated</span>
+          <span class="vpill" onclick="copyV(this)">Programmed</span>
+          <span class="vpill" onclick="copyV(this)">Drafted</span>
+          <span class="vpill" onclick="copyV(this)">Architected</span>
+          <span class="vpill" onclick="copyV(this)">Prototyped</span>
+          <span class="vpill" onclick="copyV(this)">Engineered</span>
+        </div>
+      </div>
+      <div class="verb-cat">
+        <div class="verb-cat-hd">🚫 Avoid These</div>
+        <div class="verb-pills">
+          <span class="vpill avoid">Spearheaded</span>
+          <span class="vpill avoid">Harnessed</span>
+          <span class="vpill avoid">Synergized</span>
+          <span class="vpill avoid">Quarterbacked</span>
+          <span class="vpill avoid">Passionate</span>
+          <span class="vpill avoid">Responsible for</span>
+          <span class="vpill avoid">Assisted with</span>
+          <span class="vpill avoid">Helped</span>
+          <span class="vpill avoid">Worked on</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 6. QUANTIFY -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="chapter" id="quantify">
+  <div class="chapter-inner">
+    <div class="chapter-label">Section 6</div>
+    <h2 class="chapter-title">Finding Your Numbers</h2>
+    <p class="chapter-intro">Most people think they have no metrics. They're wrong. Every role has numbers — you just have to know where to look. Here's how to find them.</p>
+
+    <div class="voice-strip" style="margin-bottom:2rem">
+      <div class="voice-card voice-recruiter">
+        <div class="voice-role"><div class="voice-icon">🔍</div>Senior Recruiter</div>
+        <p>CVs with <strong>at least 3 quantified bullets</strong> get significantly more callbacks in my experience. You don't need exact figures — approximations and ranges are fine. <strong>"Reduced churn by ~15%"</strong> beats "improved customer retention" every single time.</p>
+      </div>
+      <div class="voice-card voice-talent">
+        <div class="voice-role"><div class="voice-icon">📋</div>Head of Talent</div>
+        <p><strong>Ask your manager.</strong> Seriously. Before you leave any job, ask: "Can you share the business metrics for the projects I led?" Most managers will give you rough figures. If you can't get exact numbers, <strong>use publicly available data</strong> — company revenue, published reports, product pages.</p>
+      </div>
+      <div class="voice-card voice-hm">
+        <div class="voice-role"><div class="voice-icon">👔</div>Hiring Manager</div>
+        <p>Even soft roles have numbers. How many stakeholders? How many sessions? What was the budget? <strong>Quantity is everywhere</strong> — you just haven't been writing it down. Start doing so weekly, while it's fresh. A number doesn't have to be revenue to matter.</p>
+      </div>
+    </div>
+
+    <div class="quant-grid">
+      <div class="quant-card">
+        <h4>💰 Business Impact</h4>
+        <ul>
+          <li>Revenue generated or influenced</li>
+          <li>Cost savings achieved</li>
+          <li>ARR / MRR growth</li>
+          <li>Deals closed or supported</li>
+          <li>Budget managed ($X)</li>
+          <li>Fundraise or grant secured</li>
+        </ul>
+      </div>
+      <div class="quant-card">
+        <h4>📈 Performance %</h4>
+        <ul>
+          <li>% improvement in metric</li>
+          <li>Growth vs. prior period</li>
+          <li>Efficiency gains (time, cost)</li>
+          <li>Error reduction rate</li>
+          <li>Churn / retention change</li>
+          <li>NPS or CSAT score shift</li>
+        </ul>
+      </div>
+      <div class="quant-card">
+        <h4>👥 People & Scale</h4>
+        <ul>
+          <li>Team size managed</li>
+          <li>Number of stakeholders</li>
+          <li>Users / customers affected</li>
+          <li>Countries or regions</li>
+          <li>Candidates hired / onboarded</li>
+          <li>Events attended / organized</li>
+        </ul>
+      </div>
+      <div class="quant-card">
+        <h4>⏱ Time & Volume</h4>
+        <ul>
+          <li>Time saved (hours/week)</li>
+          <li>Time to deliver (from X to Y days)</li>
+          <li>Number of projects simultaneously</li>
+          <li>Tickets / issues resolved</li>
+          <li>Reports / documents produced</li>
+          <li>Training hours delivered</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-note" style="margin-top:1.5rem; background:var(--amber-light); border-left:3px solid var(--amber); padding:1rem 1.25rem; border-radius:0 8px 8px 0; font-size:0.86rem; line-height:1.7; color:var(--ink-mid);">
+      <strong style="color:var(--amber);">No exact number? Use a range or qualifier.</strong> "Reduced processing time by ~40%," "Managed a team of 8–12 contractors," "Generated €500K–€700K in pipeline." Approximate honesty beats no number at all.
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 7. PITFALLS -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="chapter" id="pitfalls">
+  <div class="chapter-inner">
+    <div class="chapter-label">Section 7</div>
+    <h2 class="chapter-title">Common Pitfalls & How to Fix Them</h2>
+    <p class="chapter-intro">These are the mistakes that appear in the majority of CVs. Each one reduces your chances. Each one is fixable in under 5 minutes.</p>
+
+    <div class="pitfall-list">
+      <div class="pitfall-item">
+        <div class="pitfall-icon">🚩</div>
+        <div>
+          <h4>"Responsible for..." bullets</h4>
+          <p>This phrasing describes your job description, not your achievements. It tells the recruiter what you were <em>supposed</em> to do — not what you actually accomplished.</p>
+          <div class="pitfall-fix">Replace every "Responsible for X" with a verb + outcome. "Responsible for client onboarding" → "Onboarded 40 enterprise clients across 3 verticals, achieving 94% 90-day retention."</div>
+        </div>
+      </div>
+      <div class="pitfall-item">
+        <div class="pitfall-icon">🚩</div>
+        <div>
+          <h4>One generic CV for all applications</h4>
+          <p>Recruiters and ATS systems can tell when a CV was written for a different job. The language doesn't match the posting. The emphasis is wrong. The summary describes someone else's career.</p>
+          <div class="pitfall-fix">Build a master CV with all your bullets, then create a tailored version for every application — reorder bullets, update the summary, mirror the job posting's language.</div>
+        </div>
+      </div>
+      <div class="pitfall-item">
+        <div class="pitfall-icon">🚩</div>
+        <div>
+          <h4>No professional summary</h4>
+          <p>Jumping straight to work history means you're making the recruiter figure out who you are and what you're looking for. Don't make them guess.</p>
+          <div class="pitfall-fix">Add a 2–3 line summary at the top: [Role title] with [X] years of experience in [domain], known for [key strength], currently seeking [type of role].</div>
+        </div>
+      </div>
+      <div class="pitfall-item">
+        <div class="pitfall-icon">🚩</div>
+        <div>
+          <h4>Unexplained employment gaps</h4>
+          <p>Gaps aren't disqualifying — but unexplained gaps trigger concern. Recruiters' imaginations will fill the gap with something worse than the truth.</p>
+          <div class="pitfall-fix">Address gaps briefly and honestly: "Career break (parental leave)," "Freelance consulting (2022–2023)," "Personal health — fully resolved." One line is enough. Own it.</div>
+        </div>
+      </div>
+      <div class="pitfall-item">
+        <div class="pitfall-icon">🚩</div>
+        <div>
+          <h4>Soft skills without evidence</h4>
+          <p>"Excellent communicator," "strong team player," "results-oriented." These phrases appear in 90% of CVs and say nothing. They're claims without proof.</p>
+          <div class="pitfall-fix">Either remove soft skill claims entirely, or prove them with a bullet: instead of "strong leader," write "Led team of 7 through a 6-month re-org with 0 voluntary attrition."</div>
+        </div>
+      </div>
+      <div class="pitfall-item">
+        <div class="pitfall-icon">🚩</div>
+        <div>
+          <h4>Outdated or irrelevant experience</h4>
+          <p>The part-time job from 12 years ago is not helping you. Roles older than 10–15 years should either be compressed into a single line or removed entirely.</p>
+          <div class="pitfall-fix">For older roles: compress to one line — "Junior Analyst, ABC Corp (2008–2011)." Only expand if it contains a directly relevant achievement you can't prove elsewhere.</div>
+        </div>
+      </div>
+      <div class="pitfall-item">
+        <div class="pitfall-icon">🚩</div>
+        <div>
+          <h4>Obvious AI writing ("Spearheaded synergistic initiatives")</h4>
+          <p>Recruiters are now trained to spot AI-generated CVs. Overused phrases, suspiciously perfect grammar, and a generic tone signal that you didn't write your own story — and can't be bothered to.</p>
+          <div class="pitfall-fix">Use AI as a first draft, then rewrite in your own voice. Make sure every bullet sounds like something you'd actually say. Add specific details only you would know.</div>
+        </div>
+      </div>
+      <div class="pitfall-item">
+        <div class="pitfall-icon">🚩</div>
+        <div>
+          <h4>Claiming skills you can't demonstrate</h4>
+          <p>Listing a tool or skill you barely know is a liability. Hiring managers will ask you about every line in the interview. If you're asked to demonstrate it and can't, the offer disappears.</p>
+          <div class="pitfall-fix">Only list skills you can speak confidently about for 5+ minutes. If you're learning something, list it as "Currently developing: [skill]" — this shows honesty and growth mindset.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 8. SCENARIOS -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="chapter" id="scenarios">
+  <div class="chapter-inner">
+    <div class="chapter-label">Section 8</div>
+    <h2 class="chapter-title">Special Situations</h2>
+    <p class="chapter-intro">Not every career path is linear. Here's how to handle the situations most guides ignore.</p>
+
+    <div class="scenario-tabs">
+      <button class="s-tab active" onclick="showScenario('gap', this)">Employment Gap</button>
+      <button class="s-tab" onclick="showScenario('change', this)">Career Change</button>
+      <button class="s-tab" onclick="showScenario('grad', this)">Recent Grad</button>
+      <button class="s-tab" onclick="showScenario('military', this)">Military → Civilian</button>
+      <button class="s-tab" onclick="showScenario('promo', this)">Showing Growth</button>
+    </div>
+
+    <div class="s-panel active" id="sc-gap">
+      <div class="scenario-card">
+        <h4>Handling Employment Gaps</h4>
+        <p><strong>The principle:</strong> Brief, honest, forward-facing. Don't hide it — that signals shame. Don't over-explain it — that signals defensiveness. One line is usually enough.</p>
+        <ul>
+          <li><strong>Parental leave:</strong> "Career break — parental leave (Jan 2023–Aug 2023)"</li>
+          <li><strong>Health:</strong> "Personal medical leave — fully resolved (2022)" — no need for more detail</li>
+          <li><strong>Layoff:</strong> Simply show the end date honestly. "Downsizing" is widely understood and not a disqualifier</li>
+          <li><strong>Travel / Sabbatical:</strong> "Career break — independent travel and personal development" is completely acceptable in most industries</li>
+          <li><strong>Freelance during the gap:</strong> List it as experience — "Freelance [role], 2022–2023" with bullets showing what you did</li>
+        </ul>
+        <p style="margin-top:0.75rem; color:var(--accent);"><strong>Key insight from Head of Talent:</strong> Gaps up to 12 months are now so common post-COVID that most experienced recruiters don't flag them. What matters is what you've done most recently.</p>
+      </div>
+    </div>
+
+    <div class="s-panel" id="sc-change">
+      <div class="scenario-card">
+        <h4>Changing Career or Industry</h4>
+        <p><strong>The principle:</strong> Lead with transferable skills and reframe past experience through the lens of the new industry.</p>
+        <ul>
+          <li><strong>Summary is critical:</strong> Your summary must make your pivot explicit — "Former educator transitioning into UX research, bringing 8 years of behavioral observation and curriculum design"</li>
+          <li><strong>Reframe bullets:</strong> Highlight the aspects of your old role that overlap with the new one. A teacher "managed classrooms of 30, facilitated complex concepts, and analyzed performance data" — that's project management, communication, and analytics</li>
+          <li><strong>Fill gaps with side projects:</strong> Build something in the new field. Write about it. Certify. One real project beats five listed courses</li>
+          <li><strong>Don't apologize for the change:</strong> Own the narrative — "After 7 years in X, I've developed [transferable skill] and now bring that foundation to [new field]"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="s-panel" id="sc-grad">
+      <div class="scenario-card">
+        <h4>Recent Graduate with Limited Experience</h4>
+        <p><strong>The principle:</strong> Depth over breadth. One well-described project beats ten vague internships.</p>
+        <ul>
+          <li><strong>Lead with Education</strong> if you graduated within 2 years and your degree is relevant</li>
+          <li><strong>Projects are experience.</strong> A thesis, capstone, hackathon, or open-source contribution counts. Describe it like a real job: what was the goal, what did you do, what was the result?</li>
+          <li><strong>Internships:</strong> Treat them like full roles — give them bullet points with metrics, not just title + company + "assisted the team"</li>
+          <li><strong>Volunteering and leadership:</strong> Club president, society founder, event organizer — these are leadership experiences. Write them properly</li>
+          <li><strong>Don't pad:</strong> A 1-page focused CV from a grad beats a 2-page one filled with high school achievements and irrelevant part-time work</li>
+        </ul>
+        <p style="margin-top:0.75rem; color:var(--accent);"><strong>Hiring Manager insight:</strong> I'm evaluating your potential and learning speed, not your resume length. Show me one thing you built, broke, or improved — and tell me what you learned.</p>
+      </div>
+    </div>
+
+    <div class="s-panel" id="sc-military">
+      <div class="scenario-card">
+        <h4>Military → Civilian Transition</h4>
+        <p><strong>The principle:</strong> Translate military language into civilian business value. Your experience is extensive — the challenge is making it legible to a civilian recruiter who may have no military context.</p>
+        <ul>
+          <li><strong>Translate rank and titles:</strong> "O-4 / Major" → "Senior Manager" or "Department Head." Explain what the rank meant in terms of responsibility, not hierarchy</li>
+          <li><strong>Translate missions into outcomes:</strong> "Led 23-person unit in GPS-degraded environments" → "Managed a 23-person cross-functional team to execute high-stakes operations under zero-visibility conditions with 100% mission success rate"</li>
+          <li><strong>Budget and resources are universal:</strong> "Responsible for $4.2M in assets and equipment" translates perfectly. Use it</li>
+          <li><strong>Leadership scale is your advantage:</strong> Most 30-year-old civilians have never led a team of 20. Lean into this heavily</li>
+          <li><strong>Avoid jargon:</strong> CONOPS, MOS, SITREP, TTP — spell everything out the first time, then consider if the acronym adds anything at all</li>
+          <li><strong>Connect to the company mission:</strong> Many veterans undersell themselves by not connecting their "why" to the civilian company's mission. Do this explicitly in your summary</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="s-panel" id="sc-promo">
+      <div class="scenario-card">
+        <h4>Showing Career Growth & Trajectory</h4>
+        <p><strong>The principle:</strong> Hiring managers want to hire someone on an upward trajectory. Your CV should visibly show that each role was bigger, broader, or more impactful than the last.</p>
+        <ul>
+          <li><strong>Show progression at the same company:</strong> List promotions as separate roles: "Senior Engineer (2022–present)" above "Engineer (2020–2022)" — same company, two entries</li>
+          <li><strong>Make scope expansion explicit:</strong> Use your bullets to show team sizes growing, budgets increasing, markets expanding over time</li>
+          <li><strong>Connect roles with intent:</strong> Your summary should make the through-line clear: "7-year career arc from analyst to department head, consistently expanding scope across [domain]"</li>
+          <li><strong>Don't hide lateral moves:</strong> Frame them as breadth-building — "Moved laterally from X to Y to build cross-functional expertise in Z, which enabled..."</li>
+        </ul>
+        <p style="margin-top:0.75rem; color:var(--accent);"><strong>Head of Talent insight:</strong> I look at the trajectory, not just the last role. If I see genuine progression — more complexity, more ownership, more scope — I'm already sold before I read a single bullet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 9. WORKSHOP -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="chapter" id="workshop">
+  <div class="chapter-inner">
+    <div class="chapter-label">Section 9</div>
+    <h2 class="chapter-title">Bullet Workshop</h2>
+    <p class="chapter-intro">Write, test, and refine your bullets here. Notes auto-save to your browser. Then use the AI tools to take them further.</p>
+
+    <div class="bullet-workspace">
+      <div class="workspace-title">✍️ Summary Builder</div>
+      <p style="font-size:0.83rem; color:var(--ink-soft); margin-bottom:1rem; line-height:1.65;">Build your professional summary using this formula:</p>
+      <div class="summary-formula">
+        <div class="sf-block">Role title</div>
+        <div class="sf-plus">+</div>
+        <div class="sf-block">X years experience</div>
+        <div class="sf-plus">+</div>
+        <div class="sf-block">Domain / industry</div>
+        <div class="sf-plus">+</div>
+        <div class="sf-block">Key strength</div>
+        <div class="sf-plus">+</div>
+        <div class="sf-block">What you're seeking</div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Draft Your Summary</label>
+        <textarea id="w_summary" placeholder="e.g. Product leader with 8 years of experience building B2B SaaS products from 0–1, known for user research depth and cross-functional alignment. Seeking a senior PM role at a company scaling through Series B." oninput="autosave()" rows="4"></textarea>
+        <div class="field-hint">Tailor this for every job you apply to. Swap the final sentence to reflect what <em>this</em> company is looking for.</div>
+      </div>
+    </div>
+
+    <div class="bullet-workspace">
+      <div class="workspace-title">🔨 Raw to Refined Bullet Flow</div>
+      <div class="field-group">
+        <label class="field-label">Step 1 — Raw notes on a project or task</label>
+        <textarea id="w_raw" placeholder="Write messy notes here. What did you do? Who was involved? What happened? What were the numbers? Don't worry about format — just get it out." oninput="autosave()"></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Step 2 — Draft bullet (pick a format from Section 4)</label>
+        <textarea id="w_draft" placeholder="Write a first draft bullet using XYZ, STAR, RACR, RSI, or YTW..." oninput="autosave()"></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Step 3 — Apply the "So What?" test, then refined bullet</label>
+        <textarea id="w_refined" placeholder="Final polished bullet — strong verb, metric, clear outcome..." oninput="autosave()"></textarea>
+      </div>
+    </div>
+
+    <div class="bullet-workspace">
+      <div class="workspace-title">📦 Bullet Bank — Your Best Bullets</div>
+      <div class="field-group">
+        <label class="field-label">Current Role / Most Recent Company</label>
+        <textarea id="w_bank1" placeholder="Paste your strongest bullets here. One per line." style="min-height:130px;" oninput="autosave()"></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Previous Role</label>
+        <textarea id="w_bank2" placeholder="Bullets for previous role..." style="min-height:100px;" oninput="autosave()"></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Projects / Side Work / Education</label>
+        <textarea id="w_bank3" placeholder="Bullets for side projects, freelance, academic work..." style="min-height:100px;" oninput="autosave()"></textarea>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- AI TOOLS -->
+    <h3 style="font-family:'Libre Baskerville',serif; font-size:1.3rem; margin-bottom:0.5rem; color:var(--ink);">Take it further with AI</h3>
+    <p style="font-size:0.88rem; color:var(--ink-soft); margin-bottom:1.5rem; line-height:1.7;">Paste your raw notes into Step 1 below, then refine each bullet in Step 2. The two GPTs are calibrated to work together.</p>
+    <div class="ai-tools-row">
+      <div class="ai-tool-card">
+        <div class="ai-tool-num">1</div>
+        <div class="ai-tool-tag">Step 1 of 2</div>
+        <h3>Story2Bullet GPT</h3>
+        <p>Paste a paragraph of messy notes about a project — who was involved, what you did, what happened — and this GPT extracts rough CV bullets.</p>
+        <ol>
+          <li>Write raw notes about a project in the workspace above</li>
+          <li>Copy and paste them into this GPT</li>
+          <li>Get a list of rough bullets to work with</li>
+        </ol>
+        <br>
+        <a href="https://chatgpt.com/g/g-685c1c8a07bc8191b28918260c0d6beb-story-2-bullet-extractor" target="_blank" class="ai-link">Open Story2Bullet →</a>
+      </div>
+      <div class="ai-tool-card">
+        <div class="ai-tool-num">2</div>
+        <div class="ai-tool-tag">Step 2 of 2</div>
+        <h3>BulletRefiner GPT</h3>
+        <p>Take the rough bullets from Step 1 and run them through BulletRefiner for deep polishing — stronger verbs, clearer metrics, sharper impact.</p>
+        <ol>
+          <li>Copy the rough bullets from Story2Bullet</li>
+          <li>Paste one bullet at a time into BulletRefiner</li>
+          <li>Iterate 2–3 times until it's sharp</li>
+        </ol>
+        <br>
+        <a href="https://chatgpt.com/g/g-685c20144d708191ab1388b3036b2bd8-cv-bullet-refiner" target="_blank" class="ai-link">Open BulletRefiner →</a>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- FINAL CHECKLIST -->
+    <h3 style="font-family:'Libre Baskerville',serif; font-size:1.3rem; margin-bottom:0.5rem; color:var(--ink);">Pre-Submit Checklist</h3>
+    <p style="font-size:0.88rem; color:var(--ink-soft); margin-bottom:1.25rem;">Check each box before you hit send. Click to mark complete.</p>
+    <ul class="checklist" id="checklist">
+      <li><div class="check-box" onclick="toggleCheck(this)"></div>CV is 1–2 pages maximum and every line earns its place</li>
+      <li><div class="check-box" onclick="toggleCheck(this)"></div>Professional summary is tailored to this specific job posting</li>
+      <li><div class="check-box" onclick="toggleCheck(this)"></div>No "Responsible for..." bullets — all start with action verbs</li>
+      <li><div class="check-box" onclick="toggleCheck(this)"></div>At least 3 bullets contain a quantified metric ($, %, #)</li>
+      <li><div class="check-box" onclick="toggleCheck(this)"></div>Key language from the job posting appears in your CV</li>
+      <li><div class="check-box" onclick="toggleCheck(this)"></div>Single-column, clean layout — ATS-readable</li>
+      <li><div class="check-box" onclick="toggleCheck(this)"></div>No tables, text boxes, icons, or skill bars</li>
+      <li><div class="check-box" onclick="toggleCheck(this)"></div>Consistent date format, font, and bullet style throughout</li>
+      <li><div class="check-box" onclick="toggleCheck(this)"></div>Saved as PDF, named Firstname_Lastname_CV.pdf</li>
+      <li><div class="check-box" onclick="toggleCheck(this)"></div>Asked someone else to read it — you're too close to it</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p><strong style="color:rgba(255,255,255,0.7)">Pat's CV Guide</strong> — Part of the Pat's CV Builder toolkit</p>
+  <p style="margin-top:0.4rem;">Additional resources: <a href="https://capd.mit.edu/resources/resume-action-verbs/" target="_blank">MIT Action Verbs</a> · <a href="https://ocs.yale.edu/" target="_blank">Yale Career Center</a> · <a href="https://careered.stanford.edu/" target="_blank">Stanford Career</a></p>
+  <p style="margin-top:0.4rem; font-size:0.72rem; color:rgba(255,255,255,0.2)">Notes auto-saved to your browser. No account required.</p>
+</footer>
+
+<div class="toast" id="toast">✓ Saved</div>
+
+<script>
+// ── FORMAT TABS
+function showFormat(id, el) {
+  document.querySelectorAll('.format-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.format-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('fmt-' + id).classList.add('active');
+}
+
+// ── SCENARIO TABS
+function showScenario(id, el) {
+  document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.s-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('sc-' + id).classList.add('active');
+}
+
+// ── VERB COPY
+function copyV(el) {
+  if (el.classList.contains('avoid')) return;
+  navigator.clipboard.writeText(el.textContent).then(() => {
+    el.classList.add('copied');
+    setTimeout(() => el.classList.remove('copied'), 700);
+  });
+}
+
+// ── VERB SEARCH
+function filterVerbs(query) {
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll('.vpill:not(.avoid)').forEach(p => {
+    p.classList.toggle('hidden', q && !p.textContent.toLowerCase().includes(q));
+  });
+}
+
+// ── CHECKLIST
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  el.textContent = el.classList.contains('checked') ? '✓' : '';
+  autosave();
+}
+
+// ── SCROLL PROGRESS
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('nav-progress').style.width = pct + '%';
+});
+
+// ── AUTOSAVE
+let saveTimer;
+function autosave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    const ids = ['w_summary','w_raw','w_draft','w_refined','w_bank1','w_bank2','w_bank3'];
+    const data = {};
+    ids.forEach(id => { const el = document.getElementById(id); if(el) data[id] = el.value; });
+    // Save checklist
+    const checks = [];
+    document.querySelectorAll('.check-box').forEach((b,i) => checks.push(b.classList.contains('checked')));
+    data['_checks'] = checks;
+    localStorage.setItem('pats_cv_guide', JSON.stringify(data));
+    showToast();
+  }, 700);
+}
+
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+// ── LOAD SAVED
+function loadSaved() {
+  try {
+    const raw = localStorage.getItem('pats_cv_guide');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    Object.entries(data).forEach(([k, v]) => {
+      if (k === '_checks') {
+        const boxes = document.querySelectorAll('.check-box');
+        v.forEach((checked, i) => {
+          if (checked && boxes[i]) {
+            boxes[i].classList.add('checked');
+            boxes[i].textContent = '✓';
+          }
+        });
+        return;
+      }
+      const el = document.getElementById(k);
+      if (el) el.value = v;
+    });
+  } catch(e) {}
+}
+
+loadSaved();
+</script>
+</body>
+</html>
