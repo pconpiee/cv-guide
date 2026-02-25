@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pat's Interview Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #0a0a0f;
+  --deep: #111118;
+  --panel: #16161f;
+  --panel-mid: #1e1e2a;
+  --panel-light: #252535;
+  --border: rgba(255,255,255,0.07);
+  --border-mid: rgba(255,255,255,0.12);
+  --electric: #7c6ef0;
+  --electric-light: #a597f7;
+  --electric-dim: rgba(124,110,240,0.15);
+  --gold: #e8a23c;
+  --gold-dim: rgba(232,162,60,0.12);
+  --red: #e85c5c;
+  --red-dim: rgba(232,92,92,0.12);
+  --green: #3ce8a2;
+  --green-dim: rgba(60,232,162,0.12);
+  --text: rgba(255,255,255,0.88);
+  --text-mid: rgba(255,255,255,0.55);
+  --text-soft: rgba(255,255,255,0.32);
+  --text-faint: rgba(255,255,255,0.18);
+  --white: #ffffff;
+  --glow: 0 0 40px rgba(124,110,240,0.2);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--void);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── CURSOR ── */
+body { cursor: crosshair; }
+a, button, .clickable { cursor: pointer; }
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:500;
+  height: 58px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+.nav-logo em { color: var(--electric-light); font-style: italic; }
+.nav-links { display: flex; gap: 0.15rem; list-style:none; }
+.nav-links a {
+  display: block;
+  color: var(--text-soft);
+  text-decoration: none;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.65rem;
+  border-radius: 3px;
+  transition: color 0.15s, background 0.15s;
+}
+.nav-links a:hover { color: var(--electric-light); background: var(--electric-dim); }
+.nav-ticker {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.nav-ticker span { color: var(--green); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 7rem 2rem 4rem;
+  position: relative; overflow: hidden;
+  background: var(--void);
+}
+.hero-gfx {
+  position: absolute; inset: 0; z-index: 0;
+}
+.hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.12;
+}
+.hero-circle-1 {
+  width: 600px; height: 600px;
+  background: var(--electric);
+  top: -200px; right: -100px;
+}
+.hero-circle-2 {
+  width: 400px; height: 400px;
+  background: var(--gold);
+  bottom: -100px; left: -100px;
+}
+.hero-lines {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(124,110,240,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,110,240,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-inner {
+  position: relative; z-index: 1;
+  max-width: 820px;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--electric-dim);
+  border: 1px solid rgba(124,110,240,0.3);
+  color: var(--electric-light);
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.3rem 0.85rem;
+  border-radius: 2px;
+  margin-bottom: 1.75rem;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+.hero h1 .line-accent { color: var(--electric-light); font-style: italic; }
+.hero h1 .line-dim { color: var(--text-soft); }
+.hero-sub {
+  color: var(--text-mid);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  max-width: 540px;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+.hero-research-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+.research-cell {
+  background: var(--panel);
+  padding: 1rem 1.25rem;
+}
+.research-cell-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--electric-light);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.research-cell-label { font-size: 0.72rem; color: var(--text-soft); font-weight: 500; line-height: 1.4; }
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: var(--electric);
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.88rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 4px 30px rgba(124,110,240,0.35);
+}
+.hero-cta:hover { background: var(--electric-light); transform: translateY(-2px); box-shadow: 0 8px 40px rgba(124,110,240,0.45); }
+
+/* ── CHAPTER SHELL ── */
+.chapter {
+  padding: 6rem 1.5rem;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.chapter:nth-child(odd) { background: var(--deep); }
+.chapter:nth-child(even) { background: var(--panel); }
+.chapter-inner { max-width: 960px; margin: 0 auto; }
+
+.chapter-num {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.65rem; font-weight: 800;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 0.5rem;
+}
+.chapter-num::before {
+  content: '';
+  width: 30px; height: 1px;
+  background: var(--text-faint);
+}
+.chapter-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 0.65rem;
+  letter-spacing: -0.01em;
+}
+.chapter-title em { color: var(--electric-light); font-style: italic; }
+.chapter-intro {
+  color: var(--text-mid);
+  font-size: 0.92rem;
+  max-width: 640px;
+  line-height: 1.8;
+  margin-bottom: 2.75rem;
+  font-weight: 400;
+}
+
+/* ── SCIENCE CARDS ── */
+.science-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px;
+  background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow:hidden;
+  margin-bottom: 2.5rem;
+}
+.sci-card {
+  background: var(--deep);
+  padding: 1.75rem;
+  transition: background 0.2s;
+}
+.sci-card:hover { background: var(--panel-mid); }
+.sci-card-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+.sci-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--white); margin-bottom: 0.5rem;
+}
+.sci-card-source {
+  font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--electric);
+  margin-bottom: 0.6rem;
+}
+.sci-card p { font-size: 0.83rem; color: var(--text-mid); line-height: 1.75; }
+.sci-card strong { color: var(--text); }
+
+/* ── BIAS CARDS ── */
+.bias-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+.bias-card {
+  background: var(--panel-mid);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative; overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.bias-card:hover { border-color: var(--border-mid); box-shadow: var(--glow); }
+.bias-card::before {
+  content: '';
+  position: absolute; top:0; left:0;
+  width: 3px; height: 100%;
+}
+.bias-halo::before { background: var(--gold); }
+.bias-similar::before { background: var(--electric); }
+.bias-confirm::before { background: var(--green); }
+.bias-primacy::before { background: var(--red); }
+.bias-contrast::before { background: #e87c3e; }
+.bias-horn::before { background: #e83e8c; }
+.bias-card-name {
+  font-size: 0.68rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.bias-halo .bias-card-name { color: var(--gold); }
+.bias-similar .bias-card-name { color: var(--electric-light); }
+.bias-confirm .bias-card-name { color: var(--green); }
+.bias-primacy .bias-card-name { color: var(--red); }
+.bias-contrast .bias-card-name { color: #e87c3e; }
+.bias-horn .bias-card-name { color: #e83e8c; }
+.bias-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+.bias-card-what { font-size: 0.82rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 0.85rem; }
+.bias-card-counter {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 0.79rem; line-height: 1.65;
+  color: var(--text-mid);
+}
+.bias-card-counter strong { color: var(--white); font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.3rem; }
+
+/* ── CONFIDENCE MODULE ── */
+.confidence-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+@media(max-width:640px) { .confidence-grid { grid-template-columns: 1fr; } }
+.conf-panel {
+  background: var(--panel-mid);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.75rem;
+}
+.conf-panel-title {
+  font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--electric);
+  margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.conf-panel-title::before { content: ''; width: 20px; height: 1px; background: var(--electric); }
+.conf-panel h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+.conf-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.conf-list li {
+  display: flex; gap: 0.75rem; align-items: flex-start;
+  font-size: 0.84rem; line-height: 1.65; color: var(--text-mid);
+}
+.conf-list li::before {
+  content: '→';
+  color: var(--electric-light);
+  font-size: 0.75rem;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+.conf-list li strong { color: var(--text); }
+.power-pose-box {
+  grid-column: 1/-1;
+  background: linear-gradient(135deg, rgba(124,110,240,0.1) 0%, rgba(10,10,15,0) 100%);
+  border: 1px solid rgba(124,110,240,0.25);
+  border-radius: 10px;
+  padding: 1.75rem;
+  display: flex; gap: 2rem; align-items: flex-start;
+  flex-wrap: wrap;
+}
+.pose-text { flex: 1; min-width: 220px; }
+.pose-text h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--white); margin-bottom: 0.5rem;
+}
+.pose-text p { font-size: 0.84rem; color: var(--text-mid); line-height: 1.75; }
+.pose-steps {
+  display: flex; gap: 0.75rem; flex-wrap: wrap;
+  flex: 1; min-width: 220px;
+  align-content: flex-start;
+}
+.pose-step {
+  background: var(--panel-mid);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  flex: 1; min-width: 120px;
+  text-align: center;
+}
+.pose-step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--electric-light); line-height: 1;
+  margin-bottom: 0.25rem;
+}
+.pose-step p { font-size: 0.75rem; color: var(--text-soft); line-height: 1.5; }
+
+/* ── VOICE ANXIETY ── */
+.anxiety-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.anxiety-table th {
+  text-align: left; padding: 0.75rem 1rem;
+  background: var(--panel-light);
+  font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-soft);
+  border-bottom: 1px solid var(--border);
+}
+.anxiety-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.anxiety-table tr:last-child td { border-bottom: none; }
+.anxiety-table td:first-child { color: var(--red); font-weight: 600; font-size: 0.82rem; }
+.anxiety-table td:nth-child(2) { color: var(--text-mid); font-size: 0.81rem; line-height: 1.65; }
+.anxiety-table td:last-child { color: var(--green); font-size: 0.81rem; line-height: 1.65; font-weight: 500; }
+.anxiety-wrap { background: var(--panel-mid); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+
+/* ── STORYTELLING ── */
+.story-science-box {
+  background: var(--panel-mid);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+  align-items: start;
+}
+@media(max-width:640px) { .story-science-box { grid-template-columns: 1fr; } }
+.story-science-stat {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem; font-weight: 700;
+  color: var(--electric-light); line-height: 1;
+  margin-bottom: 0.25rem;
+}
+.story-science-label { font-size: 0.78rem; color: var(--text-soft); line-height: 1.5; }
+.story-science-text { font-size: 0.87rem; color: var(--text-mid); line-height: 1.8; }
+.story-science-text strong { color: var(--text); }
+
+.story-anatomy {
+  display: flex; flex-direction: column; gap: 0;
+  border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  margin-bottom: 2rem;
+}
+.story-block {
+  display: flex; gap: 0; align-items: stretch;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.story-block:last-child { border-bottom: none; }
+.story-block:hover { background: var(--panel-mid); }
+.story-block-letter {
+  width: 56px; flex-shrink: 0;
+  background: var(--panel-light);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; font-weight: 700;
+  color: var(--electric-light);
+  border-right: 1px solid var(--border);
+}
+.story-block-body { flex: 1; padding: 1.1rem 1.25rem; }
+.story-block-title {
+  font-size: 0.8rem; font-weight: 700;
+  color: var(--white); margin-bottom: 0.3rem;
+}
+.story-block-desc { font-size: 0.81rem; color: var(--text-mid); line-height: 1.65; }
+.story-block-tip {
+  margin-top: 0.35rem;
+  font-size: 0.74rem; color: var(--electric);
+  font-style: italic;
+}
+
+/* ── STORY BUILDER ── */
+.story-builder-panel {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.sbp-header {
+  background: var(--panel-light);
+  padding: 1.1rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+.sbp-header h3 { font-size: 0.88rem; font-weight: 700; color: var(--white); }
+.sbp-header span { font-size: 0.68rem; color: var(--text-soft); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+.sbp-body { padding: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media(max-width:640px) { .sbp-body { grid-template-columns: 1fr; } }
+.sbp-field { display: flex; flex-direction: column; gap: 0.35rem; }
+.sbp-field.full { grid-column: 1/-1; }
+label.sbp-label {
+  font-size: 0.68rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-soft);
+}
+textarea.sbp-input, input.sbp-input {
+  width: 100%;
+  background: var(--panel-mid);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.7rem 0.9rem;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.83rem;
+  color: var(--text);
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+  min-height: 75px;
+}
+input.sbp-input { min-height: unset; height: 38px; }
+textarea.sbp-input:focus, input.sbp-input:focus {
+  border-color: var(--electric);
+  background: var(--panel-light);
+  box-shadow: 0 0 0 3px rgba(124,110,240,0.12);
+}
+::placeholder { color: var(--text-faint); font-style: italic; }
+
+/* ── STORY MAPPING ── */
+.question-map {
+  display: flex; flex-direction: column; gap: 0.75rem;
+}
+.qmap-item {
+  background: var(--panel-mid);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.qmap-header {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.qmap-header:hover { background: var(--panel-light); }
+.qmap-q-tag {
+  font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--electric);
+  white-space: nowrap;
+  background: var(--electric-dim);
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+  border: 1px solid rgba(124,110,240,0.2);
+  flex-shrink: 0;
+}
+.qmap-q-text { font-size: 0.88rem; font-weight: 600; color: var(--text); flex: 1; }
+.qmap-themes {
+  display: flex; gap: 0.4rem; flex-wrap: wrap; flex-shrink: 0;
+}
+.qmap-theme {
+  font-size: 0.65rem; color: var(--text-soft);
+  background: var(--panel-light); border: 1px solid var(--border);
+  padding: 0.15rem 0.5rem; border-radius: 2px;
+}
+.qmap-body {
+  display: none;
+  padding: 0 1.25rem 1.1rem;
+  border-top: 1px solid var(--border);
+}
+.qmap-item.open .qmap-body { display: block; }
+.qmap-tip { font-size: 0.82rem; color: var(--text-mid); line-height: 1.7; padding-top: 0.9rem; }
+.qmap-tip strong { color: var(--electric-light); }
+.qmap-note {
+  margin-top: 0.65rem;
+  font-size: 0.77rem; color: var(--gold);
+  font-style: italic;
+  padding: 0.6rem 0.9rem;
+  background: var(--gold-dim);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+}
+
+/* ── IMPOSTER SYNDROME ── */
+.impostor-split {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;
+}
+@media(max-width:600px) { .impostor-split { grid-template-columns: 1fr; } }
+.impostor-col {
+  background: var(--panel-mid); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+}
+.impostor-col-header {
+  padding: 0.75rem 1.1rem;
+  font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--border);
+}
+.impostor-bad .impostor-col-header { background: var(--red-dim); color: var(--red); }
+.impostor-good .impostor-col-header { background: var(--green-dim); color: var(--green); }
+.impostor-col ul { list-style: none; padding: 0; }
+.impostor-col ul li {
+  padding: 0.7rem 1.1rem;
+  font-size: 0.83rem;
+  line-height: 1.6;
+  border-bottom: 1px solid var(--border);
+}
+.impostor-col ul li:last-child { border-bottom: none; }
+.impostor-bad ul li { color: var(--red); }
+.impostor-good ul li { color: var(--green); }
+
+.mindshift-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.mindshift-item {
+  display: flex; gap: 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+}
+.ms-from {
+  flex: 1; padding: 0.9rem 1rem;
+  background: var(--red-dim);
+  font-size: 0.82rem; color: var(--red); line-height: 1.55;
+  border-right: 1px solid var(--border);
+  font-style: italic;
+}
+.ms-arrow {
+  padding: 0 0.5rem; background: var(--panel-light);
+  display: flex; align-items: center;
+  color: var(--text-faint); font-size: 0.8rem;
+  border-right: 1px solid var(--border);
+}
+.ms-to {
+  flex: 1; padding: 0.9rem 1rem;
+  background: var(--green-dim);
+  font-size: 0.82rem; color: var(--green); line-height: 1.55; font-weight: 500;
+}
+
+/* ── PRE-INTERVIEW RITUAL ── */
+.ritual-timeline {
+  display: flex; flex-direction: column; gap: 0; position: relative;
+}
+.ritual-timeline::before {
+  content: '';
+  position: absolute; left: 22px; top: 0; bottom: 0;
+  width: 1px; background: var(--border);
+}
+.ritual-item {
+  display: flex; gap: 1.25rem; align-items: flex-start;
+  padding: 1.25rem 0;
+  position: relative;
+}
+.ritual-dot {
+  width: 44px; height: 44px; flex-shrink:0;
+  background: var(--panel-light);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  position: relative; z-index: 1;
+  transition: border-color 0.2s, background 0.2s;
+}
+.ritual-item:hover .ritual-dot { border-color: var(--electric); background: var(--electric-dim); }
+.ritual-time {
+  font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--electric);
+  margin-bottom: 0.3rem;
+}
+.ritual-title { font-size: 0.92rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+.ritual-desc { font-size: 0.82rem; color: var(--text-mid); line-height: 1.7; }
+.ritual-science {
+  margin-top: 0.4rem;
+  font-size: 0.74rem;
+  color: var(--electric-light);
+  font-style: italic;
+}
+
+/* ── QUESTION WORKSHOP ── */
+.workshop-section { margin-bottom: 2rem; }
+.ws-title {
+  font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--electric);
+  margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.ws-title::before { content: ''; width: 20px; height: 1px; background: var(--electric); flex-shrink:0; }
+
+/* ── CHECKLIST ── */
+.pre-check-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+@media(max-width:600px) { .pre-check-grid { grid-template-columns: 1fr; } }
+.check-group {
+  background: var(--panel-mid); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+}
+.check-group-title {
+  padding: 0.75rem 1.1rem;
+  background: var(--panel-light);
+  font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-soft);
+  border-bottom: 1px solid var(--border);
+}
+.check-items { list-style: none; padding: 0; }
+.check-items li {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 0.75rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.83rem; color: var(--text-mid); line-height: 1.55;
+}
+.check-items li:last-child { border-bottom: none; }
+.cbox {
+  width: 16px; height: 16px; flex-shrink:0;
+  border: 1.5px solid var(--border-mid);
+  border-radius: 2px;
+  cursor: pointer; margin-top: 0.1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s; font-size: 0.6rem;
+}
+.cbox.on { background: var(--electric); border-color: var(--electric); color: #fff; }
+
+/* ── AFTER INTERVIEW ── */
+.follow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.follow-card {
+  background: var(--panel-mid); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1.4rem;
+}
+.follow-card-when {
+  font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--gold); margin-bottom: 0.5rem;
+}
+.follow-card h4 { font-size: 0.92rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+.follow-card p { font-size: 0.81rem; color: var(--text-mid); line-height: 1.7; }
+
+/* ── TOOLS ROW ── */
+.tools-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+.tool-card {
+  background: var(--panel-mid);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.75rem;
+  position: relative; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.tool-card:hover { border-color: var(--electric); transform: translateY(-3px); }
+.tool-card::before {
+  content: attr(data-num);
+  position: absolute; top: 1rem; right: 1.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem; font-weight: 700;
+  color: rgba(255,255,255,0.03);
+  line-height: 1;
+}
+.tool-tag { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--electric); margin-bottom: 0.6rem; }
+.tool-card h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+.tool-card p { font-size: 0.82rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 1.25rem; }
+.tool-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--electric);
+  color: #fff; text-decoration: none;
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+.tool-link:hover { background: var(--electric-light); }
+
+/* ── DIVIDER ── */
+hr.divide { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999;
+  background: var(--electric);
+  color: #fff;
+  padding: 0.6rem 1.1rem;
+  border-radius: 4px;
+  font-size: 0.8rem; font-weight: 700;
+  opacity: 0; transform: translateY(8px);
+  transition: all 0.2s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--void);
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  line-height: 1.8;
+}
+footer a { color: var(--electric-light); text-decoration: none; }
+
+@media(max-width:768px) {
+  nav { padding: 0 1rem; }
+  .nav-links { display: none; }
+  .chapter { padding: 3.5rem 1rem; }
+  .hero { padding: 6rem 1rem 3rem; }
+  .qmap-themes { display: none; }
+  .story-builder-panel .sbp-body { grid-template-columns: 1fr; }
+  .bias-card-counter { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Pat's <em>Interview Prep</em></div>
+  <ul class="nav-links">
+    <li><a href="#science">The Science</a></li>
+    <li><a href="#bias">Bias</a></li>
+    <li><a href="#confidence">Confidence</a></li>
+    <li><a href="#storytelling">Stories</a></li>
+    <li><a href="#questions">Questions</a></li>
+    <li><a href="#ritual">Ritual</a></li>
+    <li><a href="#workshop">Workshop</a></li>
+  </ul>
+  <div class="nav-ticker">Prep status: <span id="check-pct">0%</span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-gfx">
+    <div class="hero-lines"></div>
+    <div class="hero-circle hero-circle-1"></div>
+    <div class="hero-circle hero-circle-2"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-tag">Psychology · Bias · Confidence · Storytelling</div>
+    <h1>
+      You already have<br>
+      <span class="line-accent">the answers.</span><br>
+      <span class="line-dim">Learn to deliver them.</span>
+    </h1>
+    <p class="hero-sub">Most people lose interviews not because they lack the skills — but because they don't understand the psychology at play. This guide arms you with the science behind what interviewers are actually evaluating, and how to perform at your best when it counts.</p>
+    <div class="hero-research-bar">
+      <div class="research-cell">
+        <div class="research-cell-val">7s</div>
+        <div class="research-cell-label">Time to first impression formation</div>
+      </div>
+      <div class="research-cell">
+        <div class="research-cell-val">22×</div>
+        <div class="research-cell-label">More memorable: stories vs. facts alone</div>
+      </div>
+      <div class="research-cell">
+        <div class="research-cell-val">70%</div>
+        <div class="research-cell-label">People experience imposter syndrome</div>
+      </div>
+      <div class="research-cell">
+        <div class="research-cell-val">2min</div>
+        <div class="research-cell-label">Power pose effect on confidence hormones</div>
+      </div>
+      <div class="research-cell">
+        <div class="research-cell-val">6+</div>
+        <div class="research-cell-label">Questions one great story can answer</div>
+      </div>
+    </div>
+    <a href="#science" class="hero-cta">Enter the prep room →</a>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 1. THE SCIENCE -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="chapter" id="science">
+  <div class="chapter-inner">
+    <div class="chapter-num">Section 01</div>
+    <h2 class="chapter-title">The Psychology of<br><em>Being Evaluated</em></h2>
+    <p class="chapter-intro">Interviewers are human beings making rapid, imperfect judgments. Understanding the science of how those judgments form gives you a map of the territory — and a real strategic advantage.</p>
+
+    <div class="science-grid">
+      <div class="sci-card">
+        <div class="sci-card-icon">⏱</div>
+        <div class="sci-card-source">Princeton Research · Willis & Todorov 2006</div>
+        <div class="sci-card-title">The 7-Second Window</div>
+        <p>We form impressions of strangers in as little as <strong>100 milliseconds</strong>. In practice, the first 7–10 seconds of an interview lock in an initial verdict on trustworthiness, competence, and likeability. These impressions are extraordinarily sticky — subsequent information is filtered through them.</p>
+      </div>
+      <div class="sci-card">
+        <div class="sci-card-icon">🧠</div>
+        <div class="sci-card-source">Kahneman 2011 · Thinking, Fast and Slow</div>
+        <div class="sci-card-title">System 1 vs. System 2</div>
+        <p>Interviewers <strong>feel</strong> before they think. System 1 (fast, emotional, automatic) creates the first impression. System 2 (slow, rational, deliberate) then rationalizes it. This means your job isn't just to give good answers — it's to feel right, and then confirm that with substance.</p>
+      </div>
+      <div class="sci-card">
+        <div class="sci-card-icon">🔁</div>
+        <div class="sci-card-source">Serial Position Effect · Ebbinghaus</div>
+        <div class="sci-card-title">Primacy & Recency</div>
+        <p>Interviewers remember what you say first (primacy) and last (recency) far better than anything in the middle. <strong>Your opening and your closing are your two most critical moments.</strong> Engineer them deliberately. The middle will take care of itself.</p>
+      </div>
+      <div class="sci-card">
+        <div class="sci-card-icon">🪞</div>
+        <div class="sci-card-source">Rivera 2012 · Similarity-Attraction Theory</div>
+        <div class="sci-card-title">The Mirror Effect</div>
+        <p>Interviewers unconsciously favor candidates who <strong>remind them of themselves</strong> — shared interests, communication style, background. This isn't conspiracy; it's hardwired pattern-matching. Strategy: subtly mirror vocabulary, energy, and communication pace without being inauthentic.</p>
+      </div>
+      <div class="sci-card">
+        <div class="sci-card-icon">🎭</div>
+        <div class="sci-card-source">Cuddy, Fiske & Glick 2008</div>
+        <div class="sci-card-title">Warmth Before Competence</div>
+        <p>Humans evaluate others on two dimensions: warmth first, competence second. <strong>Trustworthiness is evaluated before ability.</strong> An interviewer who doesn't trust you won't be persuaded by your skills. Lead with authentic warmth and connection before diving into your credentials.</p>
+      </div>
+      <div class="sci-card">
+        <div class="sci-card-icon">📖</div>
+        <div class="sci-card-source">Paul Zak · Neuroeconomics Research</div>
+        <div class="sci-card-title">Neural Coupling via Stories</div>
+        <p>When you tell a story, the listener's brain <strong>synchronizes with yours</strong> (neural coupling). The more a listener's brain mirrors the storyteller's, the greater their understanding and agreement. Stories don't just communicate — they create alignment and trust at a neurological level.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--panel-mid); border:1px solid var(--border); border-radius:10px; padding:1.75rem;">
+      <div style="font-size:0.68rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:var(--electric); margin-bottom:0.75rem;">The Strategic Implication</div>
+      <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.8; max-width:680px;">An interview is not a test of your knowledge. It is a <strong style="color:var(--text)">performance of competence and trustworthiness</strong> within a human social evaluation context. The interviewers are not purely rational evaluators — they are human beings trying to answer: "Do I want to work with this person?" Prepare for that question first. Your credentials answer the second question.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 2. BIAS -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="chapter" id="bias">
+  <div class="chapter-inner">
+    <div class="chapter-num">Section 02</div>
+    <h2 class="chapter-title">6 Biases Working<br><em>Against You</em> — and How to Counter Them</h2>
+    <p class="chapter-intro">These biases are documented, replicated, and operating in almost every interview room. Knowing them doesn't just help you — it removes the mystery from rejections that had nothing to do with your ability.</p>
+
+    <div class="bias-grid">
+      <div class="bias-card bias-halo">
+        <div class="bias-card-name">Halo Effect</div>
+        <h4>One good thing makes everything look good</h4>
+        <div class="bias-card-what">If you impress on one dimension (confident opener, prestigious school, a remarkable achievement), interviewers unconsciously score you higher on unrelated dimensions too. It works in your favor — until it doesn't, when they find the gap they assumed wasn't there.</div>
+        <div class="bias-card-counter"><strong>Counter-strategy →</strong> Deliberately lead with your single most impressive credential or story. Let the halo do its work early. Then substantiate everything after it. Don't bury your strongest card in the middle.</div>
+      </div>
+      <div class="bias-card bias-similar">
+        <div class="bias-card-name">Similarity / Affinity Bias</div>
+        <h4>People hire people like themselves</h4>
+        <div class="bias-card-what">Research consistently shows interviewers rate candidates more favorably when they share interests, background, or communication style — often more than actual qualifications. This accounts for significant homogeneity in organizations and is very difficult to override consciously.</div>
+        <div class="bias-card-counter"><strong>Counter-strategy →</strong> Research your interviewer (LinkedIn). Find genuine common ground early. Mirror their communication tempo and vocabulary. Ask about their experience in the role. Connection is strategic, not sycophantic.</div>
+      </div>
+      <div class="bias-card bias-confirm">
+        <div class="bias-card-name">Confirmation Bias</div>
+        <h4>First impression becomes a filter</h4>
+        <div class="bias-card-what">Once an interviewer forms an initial impression, they unconsciously seek evidence that confirms it — and dismiss evidence that challenges it. A strong first impression means every subsequent answer is interpreted generously. A weak one means the opposite.</div>
+        <div class="bias-card-counter"><strong>Counter-strategy →</strong> Invest disproportionately in your first 90 seconds. If you stumble early, explicitly reframe: "Let me step back and give you a clearer answer on that." Don't let a shaky start compound — address it directly.</div>
+      </div>
+      <div class="bias-card bias-primacy">
+        <div class="bias-card-name">Primacy Bias</div>
+        <h4>First impressions anchor all future judgments</h4>
+        <div class="bias-card-what">The information interviewers receive first disproportionately shapes their overall evaluation. Asch (1946) showed that the order of personality descriptors changed overall impressions dramatically — even when the same words were used.</div>
+        <div class="bias-card-counter"><strong>Counter-strategy →</strong> Script your opening. Know exactly how you'll answer "Tell me about yourself" — it's your most important answer. Practice until it's instinctive. Lead with impact, not chronology.</div>
+      </div>
+      <div class="bias-card bias-contrast">
+        <div class="bias-card-name">Contrast Effect</div>
+        <h4>Your performance is graded relative to who interviewed before you</h4>
+        <div class="bias-card-what">If a strong candidate went before you, you look weaker. If a weak candidate went before you, you look stronger. You have no control over who preceded you — but you can control enough of your own performance to overcome it.</div>
+        <div class="bias-card-counter"><strong>Counter-strategy →</strong> Focus on absolute performance benchmarks, not what you imagine the competition looks like. Bring physical evidence (a portfolio, a prepared document, a case study printout) — this makes you stand out on your own terms.</div>
+      </div>
+      <div class="bias-card bias-horn">
+        <div class="bias-card-name">Horn Effect (& Attribution Bias)</div>
+        <h4>One bad moment colors everything</h4>
+        <div class="bias-card-what">The reverse of the halo — a single negative moment (late arrival, stumbled answer, awkward handshake) can cause an interviewer to interpret everything afterward through a negative lens. Attribution bias means they invent internal explanations for your behavior ("they're unprepared") rather than external ones ("they're nervous").</div>
+        <div class="bias-card-counter"><strong>Counter-strategy →</strong> Name your stumbles before they can interpret them: "I want to make sure I give you a clear answer — let me think for a moment." Brief, controlled pauses project confidence. Rushing through nervousness projects anxiety.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem; background:var(--gold-dim); border:1px solid rgba(232,162,60,0.2); border-radius:10px; padding:1.75rem;">
+      <div style="font-size:0.68rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:var(--gold); margin-bottom:0.75rem;">The Candidate's Leverage Point</div>
+      <p style="font-size:0.87rem; color:var(--text-mid); line-height:1.8; max-width:680px;">You cannot eliminate these biases — research confirms even trained interviewers operate under them. But you can <strong style="color:var(--text)">work with them strategically</strong>. Design your interview arc to build positive anchors early, inoculate against weaknesses by naming them first, and leave with a strong closing impression that stays in memory.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 3. CONFIDENCE -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="chapter" id="confidence">
+  <div class="chapter-inner">
+    <div class="chapter-num">Section 03</div>
+    <h2 class="chapter-title">Performing Confidence<br>Under <em>Pressure</em></h2>
+    <p class="chapter-intro">Confidence is not a feeling. It's a set of behaviors that can be practiced and deployed deliberately — even when anxiety is high. The research is clear: your body leads your mind.</p>
+
+    <div class="power-pose-box" style="margin-bottom:2rem; background: linear-gradient(135deg, rgba(124,110,240,0.08) 0%, rgba(10,10,15,0) 100%); border: 1px solid rgba(124,110,240,0.2); border-radius:10px; padding:1.75rem; display:flex; gap:2rem; align-items:flex-start; flex-wrap:wrap;">
+      <div style="flex:1; min-width:220px;">
+        <div style="font-size:0.68rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:var(--electric); margin-bottom:0.6rem;">Amy Cuddy, Harvard · 55+ Replication Studies</div>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:700; color:var(--white); margin-bottom:0.6rem;">The Postural Feedback Effect</h3>
+        <p style="font-size:0.84rem; color:var(--text-mid); line-height:1.75;">Your body does not just reflect how you feel — it actively <strong style="color:var(--text)">shapes how you feel</strong>. Expansive, open postures activate the behavioral approach system, increasing feelings of power, optimism, and authenticity. The hormone debate has evolved, but one finding is robust across 55+ studies: <strong style="color:var(--text)">expansive posture increases feelings of confidence</strong>. Do it before — not during — the interview.</p>
+      </div>
+      <div style="flex:1; min-width:220px;">
+        <div style="font-size:0.72rem; font-weight:700; color:var(--text-soft); margin-bottom:0.75rem; text-transform:uppercase; letter-spacing:0.08em;">The 2-Minute Protocol</div>
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+          <div style="background:var(--panel-mid); border:1px solid var(--border); border-radius:6px; padding:0.75rem 1rem; flex:1; min-width:100px; text-align:center;">
+            <div style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700; color:var(--electric-light); line-height:1; margin-bottom:0.25rem;">1</div>
+            <p style="font-size:0.74rem; color:var(--text-soft); line-height:1.5;">Find a private space 10 min before</p>
+          </div>
+          <div style="background:var(--panel-mid); border:1px solid var(--border); border-radius:6px; padding:0.75rem 1rem; flex:1; min-width:100px; text-align:center;">
+            <div style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700; color:var(--electric-light); line-height:1; margin-bottom:0.25rem;">2</div>
+            <p style="font-size:0.74rem; color:var(--text-soft); line-height:1.5;">Stand tall, chest open, hands on hips or arms wide</p>
+          </div>
+          <div style="background:var(--panel-mid); border:1px solid var(--border); border-radius:6px; padding:0.75rem 1rem; flex:1; min-width:100px; text-align:center;">
+            <div style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700; color:var(--electric-light); line-height:1; margin-bottom:0.25rem;">3</div>
+            <p style="font-size:0.74rem; color:var(--text-soft); line-height:1.5;">Hold for 2 minutes. Walk in as that version of you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="confidence-grid">
+      <div class="conf-panel">
+        <div class="conf-panel-title">In the Room — Body</div>
+        <h3>Physical Signals of Confidence</h3>
+        <ul class="conf-list">
+          <li><strong>Posture:</strong> Sit fully in the chair, back straight, slight forward lean. Don't perch on the edge — it signals anxiety.</li>
+          <li><strong>Eye contact:</strong> Maintain ~60% eye contact in person. Break to think, not to avoid. In video: look into the camera, not at the screen.</li>
+          <li><strong>Hands:</strong> Visible above the table, loose and gesturing naturally. Steepled hands signal thoughtfulness. Folded arms signal defensiveness.</li>
+          <li><strong>Nodding:</strong> Measured, deliberate head nods — not rapid bobbing. Slow nods signal authority and understanding.</li>
+          <li><strong>Entry:</strong> Walk in at a measured pace. Firm handshake, direct eye contact, smile that reaches the eyes. First 10 seconds count most.</li>
+        </ul>
+      </div>
+      <div class="conf-panel">
+        <div class="conf-panel-title">In the Room — Voice</div>
+        <h3>Vocal Signals of Confidence</h3>
+        <ul class="conf-list">
+          <li><strong>Pace:</strong> Slow down when it matters. Fast speech signals anxiety; deliberate pace signals authority. Pausing to think is power, not weakness.</li>
+          <li><strong>Tone:</strong> Upward inflection at the end of statements ("uptalk") signals uncertainty. Statements should end on a downward or flat tone.</li>
+          <li><strong>Volume:</strong> Slightly louder than conversational. Trailing off at the end of sentences undermines even strong content.</li>
+          <li><strong>Filler words:</strong> Replace "um," "like," "you know" with silence. Two seconds of silence is invisible to the listener but deafening to the speaker. Trust the pause.</li>
+          <li><strong>Hedging:</strong> Remove "I think," "kind of," "sort of," "maybe." Replace with declarative statements. Own what you say.</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="divide">
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:700; color:var(--white); margin-bottom:1.25rem;">Anxiety Reframing: What It Looks Like vs. What to Do</h3>
+    <div class="anxiety-wrap">
+      <table class="anxiety-table">
+        <thead>
+          <tr><th>Anxiety Symptom</th><th>What the interviewer sees / reads</th><th>The reframe</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Speaking too fast</td><td>Nervous, unprepared, desperate to fill silence</td><td>Slow down exactly when you most want to speed up. The pause is your power move.</td></tr>
+          <tr><td>Over-qualifying answers ("I'm not sure but...")</td><td>Lack of conviction, possibly fabricating</td><td>State your answer, then offer the caveat: "Here's my view — and of course context might shift this."</td></tr>
+          <tr><td>Avoiding the question</td><td>Hiding something; poor communicator</td><td>Bridge explicitly: "That's related to X — let me answer X and connect it back."</td></tr>
+          <tr><td>Apologizing or self-deprecating</td><td>Low confidence, possible imposter syndrome</td><td>Reframe failure as learning: "That didn't work as planned — here's what I took from it and changed."</td></tr>
+          <tr><td>Fidgeting / shifting in seat</td><td>Distracted, anxious, inattentive</td><td>Ground your feet flat on the floor. Physical grounding reduces psychological anxiety.</td></tr>
+          <tr><td>Long awkward silence after question</td><td>Unprepared, slow thinker</td><td>"That's a good question — give me a moment to think." Naming the pause normalizes it instantly.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 4. IMPOSTER SYNDROME -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="chapter" id="impostor">
+  <div class="chapter-inner">
+    <div class="chapter-num">Section 04</div>
+    <h2 class="chapter-title">Beating<br><em>Imposter Syndrome</em></h2>
+    <p class="chapter-intro">70% of people experience imposter syndrome at some point — including the person interviewing you. The research shows it manifests in your language, your CV, your answers, and your ability to even apply in the first place. Here's how to dismantle it.</p>
+
+    <div class="impostor-split">
+      <div class="impostor-col impostor-bad">
+        <div class="impostor-col-header">Imposter Language — What it sounds like</div>
+        <ul>
+          <li>"I just contributed to the project..."</li>
+          <li>"I think I might be a good fit..."</li>
+          <li>"I kind of managed the team..."</li>
+          <li>"I was lucky that it worked out..."</li>
+          <li>"I don't know if this counts but..."</li>
+          <li>"I worked on" instead of "I launched"</li>
+          <li>"Helped with" instead of "led"</li>
+        </ul>
+      </div>
+      <div class="impostor-col impostor-good">
+        <div class="impostor-col-header">Confident Language — What to say instead</div>
+        <ul>
+          <li>"I led the delivery of..."</li>
+          <li>"I'm the right fit because..."</li>
+          <li>"I managed a team of 7 to..."</li>
+          <li>"We executed well because I..."</li>
+          <li>"Here's a relevant example..."</li>
+          <li>"I launched" / "I built" / "I shipped"</li>
+          <li>"I directed" / "I owned" / "I drove"</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700; color:var(--white); margin-bottom:1rem;">Mindshift Rewires</h3>
+    <p style="font-size:0.85rem; color:var(--text-mid); margin-bottom:1.25rem; line-height:1.7;">The language you use in your head before the interview determines what comes out of your mouth during it. Rewrite these internal scripts before you walk in.</p>
+    <div class="mindshift-list">
+      <div class="mindshift-item">
+        <div class="ms-from">"Am I good enough for this role?"</div>
+        <div class="ms-arrow">→</div>
+        <div class="ms-to">"How specifically can I add value in this role?"</div>
+      </div>
+      <div class="mindshift-item">
+        <div class="ms-from">"What if they find out I don't know everything?"</div>
+        <div class="ms-arrow">→</div>
+        <div class="ms-to">"What I don't know yet, I know how to learn."</div>
+      </div>
+      <div class="mindshift-item">
+        <div class="ms-from">"I got lucky with that achievement."</div>
+        <div class="ms-arrow">→</div>
+        <div class="ms-to">"I created the conditions for that outcome. That's skill."</div>
+      </div>
+      <div class="mindshift-item">
+        <div class="ms-from">"There are better candidates than me."</div>
+        <div class="ms-arrow">→</div>
+        <div class="ms-to">"I'm here because I cleared their filter. Now I prove they were right."</div>
+      </div>
+      <div class="mindshift-item">
+        <div class="ms-from">"I'll probably blank and forget everything."</div>
+        <div class="ms-arrow">→</div>
+        <div class="ms-to">"I've prepared specific stories. I have the receipts. I can do this."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 5. STORYTELLING -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="chapter" id="storytelling">
+  <div class="chapter-inner">
+    <div class="chapter-num">Section 05</div>
+    <h2 class="chapter-title">The Neuroscience of<br><em>Telling Your Story</em></h2>
+    <p class="chapter-intro">Facts inform. Stories persuade. The neuroscience is unambiguous: stories bypass cognitive resistance, synchronize brains, trigger emotional memory encoding, and create trust faster than any other form of communication.</p>
+
+    <div class="story-science-box">
+      <div>
+        <div class="story-science-stat">22×</div>
+        <div class="story-science-label">More memorable than facts alone<br><em style="color:var(--text-faint)">Stanford research, Jennifer Aaker</em></div>
+      </div>
+      <div class="story-science-text">
+        <p>When you recite qualifications, the interviewer's brain processes them as data. When you tell a story — with tension, a protagonist (you), a challenge, and a resolution — <strong>their brain processes it as experience.</strong> The cortex, emotional centers, and motor regions all activate simultaneously. They don't just understand what happened — they feel it.</p>
+        <br>
+        <p>This is why two candidates with identical experience often get wildly different outcomes. The one who tells better stories wins — not because they're more qualified, but because <strong>they're more memorable, more trusted, and more viscerally convincing.</strong></p>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:700; color:var(--white); margin-bottom:1.1rem;">The STAR-L Framework — With Storytelling Principles</h3>
+
+    <div class="story-anatomy">
+      <div class="story-block">
+        <div class="story-block-letter">S</div>
+        <div class="story-block-body">
+          <div class="story-block-title">Situation — Set the Scene, Not the History</div>
+          <div class="story-block-desc">Give just enough context for the listener to understand the stakes. 2–3 sentences maximum. Name the organization type, the scale, the moment in time. Skip the backstory — it kills momentum.</div>
+          <div class="story-block-tip">💡 Open with tension, not context. "We had 6 weeks and no budget" is more compelling than "In 2022, I was working at Company X which was founded in..."</div>
+        </div>
+      </div>
+      <div class="story-block">
+        <div class="story-block-letter">T</div>
+        <div class="story-block-body">
+          <div class="story-block-title">Task — Make the Stakes Vivid</div>
+          <div class="story-block-desc">Define your specific responsibility, the starting point, the goal, and what would happen if you failed. Stakes create tension — and tension is what makes people lean forward.</div>
+          <div class="story-block-tip">💡 "What would happen if you failed?" is the question most people skip. It's the most powerful line in your story.</div>
+        </div>
+      </div>
+      <div class="story-block">
+        <div class="story-block-letter">A</div>
+        <div class="story-block-body">
+          <div class="story-block-title">Action — Show Judgment, Not Just Activity</div>
+          <div class="story-block-desc">Walk through 3–4 steps at a high level. Include the hardest moment — the obstacle you hit — and how you specifically decided to handle it. This is where your judgment is revealed. Don't just describe what happened — explain <em>why</em> you made that call.</div>
+          <div class="story-block-tip">💡 The best interviewers are listening for your decision-making framework, not your execution. Make your logic explicit.</div>
+        </div>
+      </div>
+      <div class="story-block">
+        <div class="story-block-letter">R</div>
+        <div class="story-block-body">
+          <div class="story-block-title">Result — Land the Metric, Then the Meaning</div>
+          <div class="story-block-desc">Quantify the outcome first ($, %, # people, time). Then state the second-order impact — what did this enable? Add a "wow" fact if you have one. End on a high note — you're using the recency effect here.</div>
+          <div class="story-block-tip">💡 "We hit €640K ARR" lands. "We hit €640K ARR — which became the anchor round for our Series A" is unforgettable.</div>
+        </div>
+      </div>
+      <div class="story-block" style="border-bottom:none;">
+        <div class="story-block-letter" style="color:var(--gold);">L</div>
+        <div class="story-block-body">
+          <div class="story-block-title">Lesson Learned — The Rare Differentiator</div>
+          <div class="story-block-desc">Most candidates skip this. Don't. Naming what you'd do differently shows self-awareness, intellectual humility, and growth mindset — traits that senior interviewers weight heavily. Poke holes in your past decisions. Show you've evolved.</div>
+          <div class="story-block-tip" style="color:var(--gold);">💡 Bonus: Offer two alternatives and explain when you'd choose each. This shows meta-level strategic thinking that almost no candidate demonstrates.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--panel-mid); border:1px solid var(--border); border-radius:10px; padding:1.75rem;">
+      <div style="font-size:0.68rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:var(--electric); margin-bottom:0.75rem;">Story Timing — The Goldilocks Rule</div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem;">
+        <div style="text-align:center; padding:1rem; background:var(--red-dim); border:1px solid rgba(232,92,92,0.2); border-radius:6px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700; color:var(--red);">&lt; 60s</div>
+          <div style="font-size:0.77rem; color:var(--text-soft); margin-top:0.25rem;">Too brief. No emotional investment, no trust built.</div>
+        </div>
+        <div style="text-align:center; padding:1rem; background:var(--green-dim); border:1px solid rgba(60,232,162,0.2); border-radius:6px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700; color:var(--green);">1–3 min</div>
+          <div style="font-size:0.77rem; color:var(--text-soft); margin-top:0.25rem;">Sweet spot. Memorable, complete, respect for their time.</div>
+        </div>
+        <div style="text-align:center; padding:1rem; background:var(--red-dim); border:1px solid rgba(232,92,92,0.2); border-radius:6px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700; color:var(--red);">&gt; 4 min</div>
+          <div style="font-size:0.77rem; color:var(--text-soft); margin-top:0.25rem;">Too long. Listener checks out. Risk of wandering off-point.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 6. QUESTION MAP -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="chapter" id="questions">
+  <div class="chapter-inner">
+    <div class="chapter-num">Section 06</div>
+    <h2 class="chapter-title">Top Interview Questions<br>& <em>How to Own Them</em></h2>
+    <p class="chapter-intro">One great story can answer 6+ questions depending on framing. Your goal is not to memorize 30 answers — it's to master 6–10 stories and map them to question themes. Click any question to expand the strategy.</p>
+
+    <div class="question-map">
+
+      <div class="qmap-item">
+        <div class="qmap-header" onclick="toggleQ(this)">
+          <div class="qmap-q-tag">Universal</div>
+          <div class="qmap-q-text">"Tell me about yourself."</div>
+          <div class="qmap-themes"><div class="qmap-theme">Primacy</div><div class="qmap-theme">First impression</div></div>
+        </div>
+        <div class="qmap-body">
+          <div class="qmap-tip">This is the most important question you'll face. It's not an invitation to give your life story — it's your <strong>opening statement to a jury</strong>. Structure it as: present (who you are now + title) → past (what led you here, in 1–2 lines) → future (why this role, why this company). End with a bridge that invites dialogue. Time limit: <strong>90 seconds maximum.</strong></div>
+          <div class="qmap-note">Primacy bias in action: your answer to this question creates the anchor impression for everything that follows. Rehearse this one more than any other.</div>
+        </div>
+      </div>
+
+      <div class="qmap-item">
+        <div class="qmap-header" onclick="toggleQ(this)">
+          <div class="qmap-q-tag">Behavioral</div>
+          <div class="qmap-q-text">"Tell me about a time you overcame a major challenge."</div>
+          <div class="qmap-themes"><div class="qmap-theme">Resilience</div><div class="qmap-theme">Problem-solving</div></div>
+        </div>
+        <div class="qmap-body">
+          <div class="qmap-tip">Use your STAR-L story with the highest stakes. <strong>Don't sanitize the difficulty.</strong> Interviewers are listening for: How bad did it get? What did you actually do (not what the team did)? What's your relationship with adversity? Open with the tension — "The system crashed 48 hours before the client presentation." Then show your decision-making. Close with the result and what you'd do differently.</div>
+          <div class="qmap-note">This question works for: leadership, failure, cross-functional conflict, external pressure, ethical dilemma, or technical failure stories.</div>
+        </div>
+      </div>
+
+      <div class="qmap-item">
+        <div class="qmap-header" onclick="toggleQ(this)">
+          <div class="qmap-q-tag">Behavioral</div>
+          <div class="qmap-q-text">"Tell me about a time you failed."</div>
+          <div class="qmap-themes"><div class="qmap-theme">Self-awareness</div><div class="qmap-theme">Growth mindset</div></div>
+        </div>
+        <div class="qmap-body">
+          <div class="qmap-tip">Most candidates pick a "fake" failure (a strength in disguise). Interviewers see through this instantly. Pick a <strong>real failure with a real consequence</strong>. The structure: (1) characterize the failure honestly, (2) own your specific role in it without excusing yourself, (3) describe what you learned, (4) show how that learning changed your subsequent behavior with a concrete example. The learning arc must be genuine.</div>
+          <div class="qmap-note">Imposter syndrome alert: don't catastrophize the failure to seem humble. State it plainly. The wisdom is in the lesson, not the drama of the mistake.</div>
+        </div>
+      </div>
+
+      <div class="qmap-item">
+        <div class="qmap-header" onclick="toggleQ(this)">
+          <div class="qmap-q-tag">Leadership</div>
+          <div class="qmap-q-text">"Describe a time you led through ambiguity or without authority."</div>
+          <div class="qmap-themes"><div class="qmap-theme">Leadership</div><div class="qmap-theme">Influence</div></div>
+        </div>
+        <div class="qmap-body">
+          <div class="qmap-tip">This is a proxy for: "Can you drive outcomes without a title?" The key moves: (1) name that you had no formal authority — don't downplay this, it's what makes the story interesting. (2) Describe how you built credibility and created buy-in through influence rather than hierarchy. (3) Show the result wasn't just a task completed — a working relationship, a coalition, a precedent was built. <strong>The interpersonal navigation is the story.</strong></div>
+          <div class="qmap-note">Senior interviewers weight this question heavily — especially for roles that require cross-functional influence. Prepare at least two stories at different levels of scale.</div>
+        </div>
+      </div>
+
+      <div class="qmap-item">
+        <div class="qmap-header" onclick="toggleQ(this)">
+          <div class="qmap-q-tag">Conflict</div>
+          <div class="qmap-q-text">"Tell me about a time you disagreed with a manager or senior leader."</div>
+          <div class="qmap-themes"><div class="qmap-theme">Maturity</div><div class="qmap-theme">Communication</div></div>
+        </div>
+        <div class="qmap-body">
+          <div class="qmap-tip">They are testing: (1) Can you think independently? (2) Can you advocate for your view without being insubordinate? (3) Can you disagree and commit? Structure: state the disagreement clearly and factually. Show the process you used to raise it (research, data, framing). Show how you listened. Then show how you moved forward — whether you won the argument or not. <strong>Disagree-and-commit is a senior skill. Show it.</strong></div>
+          <div class="qmap-note">Don't make your manager look bad. The story isn't about them being wrong — it's about you navigating a professional difference with integrity.</div>
+        </div>
+      </div>
+
+      <div class="qmap-item">
+        <div class="qmap-header" onclick="toggleQ(this)">
+          <div class="qmap-q-tag">Strategic</div>
+          <div class="qmap-q-text">"Why do you want this role / this company specifically?"</div>
+          <div class="qmap-themes"><div class="qmap-theme">Motivation</div><div class="qmap-theme">Fit</div></div>
+        </div>
+        <div class="qmap-body">
+          <div class="qmap-tip">This is a research test and a values test. Weak answer: "You're a great company with great culture." Strong answer: three specific, researched reasons: <strong>(1) the problem you solve</strong> — "Your approach to [specific product/market] is the right attack on [specific problem] because..." <strong>(2) the team / leadership</strong> — something you know from the CEO's writing, the founding story, or their public work. <strong>(3) the timing</strong> — why now is the right moment for you to join this journey.</div>
+          <div class="qmap-note">Inoculate against similarity bias: find a genuine point of connection with this company's mission that is personally meaningful to you. Authenticity is detectable and memorable.</div>
+        </div>
+      </div>
+
+      <div class="qmap-item">
+        <div class="qmap-header" onclick="toggleQ(this)">
+          <div class="qmap-q-tag">Closing</div>
+          <div class="qmap-q-text">"What questions do you have for us?"</div>
+          <div class="qmap-themes"><div class="qmap-theme">Recency</div><div class="qmap-theme">Curiosity</div></div>
+        </div>
+        <div class="qmap-body">
+          <div class="qmap-tip">This is your last impression — use recency bias intentionally. Do not ask about salary, benefits, or hours. Instead: <strong>(1) Ask about the work</strong> — "What does success look like in the first 90 days?" <strong>(2) Ask about the challenges</strong> — "What's the hardest part of this role that the job description doesn't capture?" <strong>(3) Ask about the interviewer</strong> — "What's kept you here?" People remember conversations where they felt heard. Be the candidate who listened and asked smart questions.</div>
+          <div class="qmap-note">Prepare 5 questions. You'll likely only need 2–3. Having more shows genuine curiosity — and ensures you're not stuck if some are answered during the interview.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 7. PRE-INTERVIEW RITUAL -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="chapter" id="ritual">
+  <div class="chapter-inner">
+    <div class="chapter-num">Section 07</div>
+    <h2 class="chapter-title">The Pre-Interview<br><em>Ritual</em></h2>
+    <p class="chapter-intro">Elite performers don't improvise their preparation. They ritualize it. Here is a research-backed sequence for the 24 hours before your interview, designed to prime your confidence and minimize anxiety.</p>
+
+    <div class="ritual-timeline">
+      <div class="ritual-item">
+        <div class="ritual-dot">📖</div>
+        <div>
+          <div class="ritual-time">Night before — 60 min</div>
+          <div class="ritual-title">Research & Story Review</div>
+          <div class="ritual-desc">Read the company's latest news, the CEO's LinkedIn, the job posting again. Re-read your 6 STAR-L stories. Don't try to memorize — you want active retrieval, not passive re-reading. Cover each story and try to recall the key beats aloud. If it comes naturally, it's ready.</div>
+          <div class="ritual-science">Cognitive science: active recall (testing yourself) is 2–4× more effective than re-reading for retention. Ebbinghaus forgetting curve.</div>
+        </div>
+      </div>
+      <div class="ritual-item">
+        <div class="ritual-dot">😴</div>
+        <div>
+          <div class="ritual-time">Night before — sleep</div>
+          <div class="ritual-title">Non-Negotiable: 7–8 Hours of Sleep</div>
+          <div class="ritual-desc">Sleep deprivation reduces working memory, emotional regulation, and verbal fluency — the exact skills tested in interviews. Staying up late to "cram" is neurologically counterproductive. Your brain consolidates memory during sleep — the stories you reviewed will be sharper after a full night.</div>
+          <div class="ritual-science">Matthew Walker's research: a single night of poor sleep reduces cognitive performance by up to 40%.</div>
+        </div>
+      </div>
+      <div class="ritual-item">
+        <div class="ritual-dot">🏃</div>
+        <div>
+          <div class="ritual-time">Morning of — 20–30 min</div>
+          <div class="ritual-title">Physical Movement</div>
+          <div class="ritual-desc">Exercise raises dopamine, norepinephrine, and serotonin — all of which improve focus, mood, and verbal fluency. Even a 20-minute walk meaningfully improves cognitive performance for 2–4 hours afterward. Don't exhaust yourself; energize yourself.</div>
+          <div class="ritual-science">John Ratey's research in Spark: exercise is "Miracle-Gro for the brain" — stimulates BDNF, a protein that enhances neural connectivity.</div>
+        </div>
+      </div>
+      <div class="ritual-item">
+        <div class="ritual-dot">🪞</div>
+        <div>
+          <div class="ritual-time">30 minutes before</div>
+          <div class="ritual-title">One Story Aloud + Power Pose</div>
+          <div class="ritual-desc">Tell your opening story (answer to "Tell me about yourself") aloud once — not in your head, aloud. Hearing your own voice delivering it primes the neural pathways. Then find a private space and do 2 minutes of expansive power posture. This is your physiological reset. Walk in as the person who belongs.</div>
+          <div class="ritual-science">Cuddy (2012, 2018): expansive posture activates behavioral approach system, increasing confidence and reducing performance anxiety.</div>
+        </div>
+      </div>
+      <div class="ritual-item">
+        <div class="ritual-dot">🧘</div>
+        <div>
+          <div class="ritual-time">10 minutes before</div>
+          <div class="ritual-title">Box Breathing (4-4-4-4)</div>
+          <div class="ritual-desc">Inhale 4 counts, hold 4, exhale 4, hold 4. Repeat 4–6 times. This activates the parasympathetic nervous system, lowering cortisol, slowing heart rate, and restoring executive function. Used by Navy SEALs before high-stakes operations. Takes 2 minutes and has measurable neurological impact.</div>
+          <div class="ritual-science">US Navy SEAL research + HRV (heart rate variability) studies confirm box breathing as the fastest method for acute stress reduction.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 8. WORKSHOP -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="chapter" id="workshop">
+  <div class="chapter-inner">
+    <div class="chapter-num">Section 08</div>
+    <h2 class="chapter-title">Your Story<br><em>Workshop</em></h2>
+    <p class="chapter-intro">Write, store, and practice your stories here. Notes save automatically in your browser. Aim for 6–10 prepared stories covering different themes. One great story can answer 6+ different questions.</p>
+
+    <!-- STORY BUILDER -->
+    <div class="workshop-section">
+      <div class="ws-title">Story Builder — Write Your STAR-L Stories</div>
+      <div class="story-builder-panel">
+        <div class="sbp-header">
+          <h3>Story #<span id="active-story-num">1</span> — <span id="active-story-theme">Enter a title below</span></h3>
+          <span>Auto-saved · <span id="story-count">0</span>/10 stories</span>
+        </div>
+        <div class="sbp-body">
+          <div class="sbp-field full">
+            <label class="sbp-label">Story Title & Themes (for mapping)</label>
+            <input class="sbp-input" id="st_title" placeholder="e.g. 'Product launch under pressure' — Adversity, Leadership, Execution" oninput="save()">
+          </div>
+          <div class="sbp-field">
+            <label class="sbp-label">S — Situation</label>
+            <textarea class="sbp-input" id="st_s" placeholder="Context. 2–3 sentences. Open with tension, not backstory." oninput="save()"></textarea>
+          </div>
+          <div class="sbp-field">
+            <label class="sbp-label">T — Task & Stakes</label>
+            <textarea class="sbp-input" id="st_t" placeholder="Your specific responsibility. What would happen if you failed?" oninput="save()"></textarea>
+          </div>
+          <div class="sbp-field">
+            <label class="sbp-label">A — Action & Decision</label>
+            <textarea class="sbp-input" id="st_a" placeholder="3–4 steps. Include the hardest moment. Explain your judgment, not just your activity." oninput="save()"></textarea>
+          </div>
+          <div class="sbp-field">
+            <label class="sbp-label">R — Result (Quantified)</label>
+            <textarea class="sbp-input" id="st_r" placeholder="Metric first ($, %, #). Then second-order impact. End strong — recency effect." oninput="save()"></textarea>
+          </div>
+          <div class="sbp-field full">
+            <label class="sbp-label">L — Lesson Learned (Differentiator)</label>
+            <textarea class="sbp-input" id="st_l" placeholder="What would you do differently? Poke holes in your past choices. Offer alternatives. Show you've grown." oninput="save()"></textarea>
+          </div>
+          <div class="sbp-field full" style="display:flex; gap:0.75rem; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+            <div style="display:flex;gap:0.5rem;">
+              <button class="action-btn" style="background:var(--electric); color:#fff; font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:700; padding:0.55rem 1.1rem; border:none; border-radius:3px; cursor:pointer;" onclick="saveStory()">Save Story</button>
+              <button class="action-btn" style="background:var(--panel-light); color:var(--text-mid); font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600; padding:0.55rem 1.1rem; border:1px solid var(--border); border-radius:3px; cursor:pointer;" onclick="newStory()">+ New Story</button>
+            </div>
+            <div id="story-nav" style="display:flex; gap:0.35rem; flex-wrap:wrap;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS TO PREP -->
+    <div class="workshop-section">
+      <div class="ws-title">Questions to Prepare — Your Workspace</div>
+      <div class="story-builder-panel">
+        <div class="sbp-body" style="grid-template-columns:1fr;">
+          <div class="sbp-field">
+            <label class="sbp-label">Role-specific questions (paste from Google / AI research)</label>
+            <textarea class="sbp-input" id="w_q_list" placeholder="1. Describe a time you managed a complex stakeholder environment...&#10;2. What's your approach to prioritization under resource constraints?&#10;3. ..." style="min-height:140px;" oninput="save()"></textarea>
+          </div>
+          <div class="sbp-field">
+            <label class="sbp-label">Story-to-question mapping (which stories cover which questions?)</label>
+            <textarea class="sbp-input" id="w_q_map" placeholder="Q1 → Story 2 (stakeholder conflict), Story 4 (product crisis)&#10;Q2 → Story 1 (prioritization framework), Story 3 (resource constraints)&#10;..." style="min-height:120px;" oninput="save()"></textarea>
+          </div>
+          <div class="sbp-field">
+            <label class="sbp-label">Your 5 Questions to Ask Them</label>
+            <textarea class="sbp-input" id="w_q_ask" placeholder="1. What does success look like in the first 90 days?&#10;2. What's the hardest part of this role that the JD doesn't capture?&#10;3. What's kept you here?" style="min-height:120px;" oninput="save()"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div class="workshop-section">
+      <div class="ws-title">Pre-Interview Checklist</div>
+      <div class="pre-check-grid">
+        <div class="check-group">
+          <div class="check-group-title">Research</div>
+          <ul class="check-items">
+            <li><div class="cbox" onclick="chk(this)"></div>Read the job posting 3× and highlighted key requirements</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Researched the company's latest news / product</li>
+            <li><div class="cbox" onclick="chk(this)"></div>LinkedIn-researched your interviewer(s)</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Know the company's mission and can say why it resonates</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Prepared 5 questions to ask them</li>
+          </ul>
+        </div>
+        <div class="check-group">
+          <div class="check-group-title">Stories</div>
+          <ul class="check-items">
+            <li><div class="cbox" onclick="chk(this)"></div>Written 6+ STAR-L stories covering key themes</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Mapped stories to likely question types</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Rehearsed each story aloud at least 3×</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Timed each story (target: 1.5–3 min each)</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Practiced "Tell me about yourself" until instinctive</li>
+          </ul>
+        </div>
+        <div class="check-group">
+          <div class="check-group-title">Confidence & Mindset</div>
+          <ul class="check-items">
+            <li><div class="cbox" onclick="chk(this)"></div>Written down 3 things I've genuinely accomplished</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Identified my "imposter language" and replaced it</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Planned morning exercise before the interview</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Planned 2-min power pose before entering</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Planned box breathing immediately beforehand</li>
+          </ul>
+        </div>
+        <div class="check-group">
+          <div class="check-group-title">Logistics</div>
+          <ul class="check-items">
+            <li><div class="cbox" onclick="chk(this)"></div>Know exact location / Zoom link and tested it</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Interview outfit planned and ready</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Printed copy of CV / portfolio if in-person</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Plan to arrive 10–15 min early</li>
+            <li><div class="cbox" onclick="chk(this)"></div>Phone on silent and ready to focus</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- AFTER THE INTERVIEW -->
+    <div class="workshop-section">
+      <div class="ws-title">After the Interview</div>
+      <div class="follow-grid">
+        <div class="follow-card">
+          <div class="follow-card-when">Within 24 hours</div>
+          <h4>Send a Thank You Note</h4>
+          <p>Email each interviewer separately (not a group email). Reference one specific thing from your conversation — a point they made, a topic you discussed. This demonstrates genuine attention and uses the recency effect. Keep it to 3–4 sentences.</p>
+        </div>
+        <div class="follow-card">
+          <div class="follow-card-when">Same day</div>
+          <h4>Debrief Yourself</h4>
+          <p>Write down: (1) the questions that surprised you, (2) your weakest answer, (3) something you wish you'd said. This becomes your next interview prep — pattern recognition across multiple interviews is how you improve. Add missed stories to your bank.</p>
+        </div>
+        <div class="follow-card">
+          <div class="follow-card-when">If no response in 1 week</div>
+          <h4>Follow Up Once</h4>
+          <p>One polite, brief follow-up email is appropriate. Reiterate your interest in one sentence, note you're following up on the timeline they shared. Do not apologize for following up. If they don't respond after that, you have your answer.</p>
+        </div>
+        <div class="follow-card">
+          <div class="follow-card-when">Always</div>
+          <h4>Add to Your Story Bank</h4>
+          <p>Every interview teaches you something. Add new stories, refine weak ones, capture questions you didn't expect. Your story bank compounds over time — the more interviews you do, the sharper your next one becomes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GPT TOOLS -->
+    <div class="workshop-section">
+      <div class="ws-title">AI Tools for Interview Prep</div>
+      <div class="tools-row">
+        <div class="tool-card" data-num="1">
+          <div class="tool-tag">Story Extraction</div>
+          <h3>Story2Bullet GPT</h3>
+          <p>Paste raw notes about your experiences and this GPT will extract structured STAR story components and CV bullets from your raw narrative.</p>
+          <a href="https://chatgpt.com/g/g-685c1c8a07bc8191b28918260c0d6beb-story-2-bullet-extractor" target="_blank" class="tool-link">Open →</a>
+        </div>
+        <div class="tool-card" data-num="2">
+          <div class="tool-tag">Story Refinement</div>
+          <h3>BulletRefiner GPT</h3>
+          <p>Take your rough STAR stories and CV bullets and refine them with stronger language, sharper metrics, and more compelling framing.</p>
+          <a href="https://chatgpt.com/g/g-685c20144d708191ab1388b3036b2bd8-cv-bullet-refiner" target="_blank" class="tool-link">Open →</a>
+        </div>
+        <div class="tool-card" data-num="3">
+          <div class="tool-tag">Mock Interview</div>
+          <h3>ChatGPT / Claude Mock Interview</h3>
+          <p>Paste your job description and ask: "Interview me for this role. Ask me 10 behavioral questions one at a time and give me feedback on each answer." Use it until your stories feel natural.</p>
+          <a href="https://claude.ai" target="_blank" class="tool-link">Use Claude →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong style="color:rgba(255,255,255,0.6)">Pat's Interview Prep</strong> — Part of the Pat's CV Builder toolkit</p>
+  <p style="margin-top:0.3rem; font-size:0.72rem;">Research sources: Cuddy (2012, 2018) · Kahneman (2011) · Zak (2013) · Willis & Todorov (2006) · Ebbinghaus · Rivera (2012) · Walker (2017) · Ratey (2008)</p>
+  <p style="margin-top:0.3rem; font-size:0.7rem; color:rgba(255,255,255,0.1)">Notes saved to your browser. No account needed.</p>
+</footer>
+
+<div class="toast" id="toast">✓ Saved</div>
+
+<script>
+// ── QUESTION ACCORDION
+function toggleQ(header) {
+  const item = header.parentElement;
+  item.classList.toggle('open');
+}
+
+// ── STORY STORAGE
+let stories = JSON.parse(localStorage.getItem('pat_ip_stories') || '[]');
+let currentIdx = 0;
+
+function storyFields() {
+  return ['st_title','st_s','st_t','st_a','st_r','st_l'];
+}
+
+function loadStory(idx) {
+  currentIdx = idx;
+  const s = stories[idx] || {};
+  storyFields().forEach(f => {
+    const el = document.getElementById(f);
+    if(el) el.value = s[f] || '';
+  });
+  document.getElementById('active-story-num').textContent = idx + 1;
+  const title = s.st_title || 'Enter a title below';
+  document.getElementById('active-story-theme').textContent = title.substring(0,40) + (title.length > 40 ? '...' : '');
+  renderNav();
+}
+
+function saveStory() {
+  const s = {};
+  storyFields().forEach(f => { s[f] = document.getElementById(f)?.value || ''; });
+  stories[currentIdx] = s;
+  localStorage.setItem('pat_ip_stories', JSON.stringify(stories));
+  document.getElementById('story-count').textContent = stories.filter(x=>x.st_title).length;
+  renderNav();
+  showToast();
+}
+
+function newStory() {
+  saveStory();
+  if(stories.length >= 10) return;
+  stories.push({});
+  currentIdx = stories.length - 1;
+  storyFields().forEach(f => { const el = document.getElementById(f); if(el) el.value = ''; });
+  document.getElementById('active-story-num').textContent = currentIdx + 1;
+  document.getElementById('active-story-theme').textContent = 'Enter a title below';
+  renderNav();
+}
+
+function renderNav() {
+  const nav = document.getElementById('story-nav');
+  nav.innerHTML = stories.map((s,i) =>
+    `<button onclick="saveStory();loadStory(${i})" style="width:28px;height:28px;border-radius:50%;border:1.5px solid ${i===currentIdx?'var(--electric)':'var(--border)'};background:${i===currentIdx?'var(--electric-dim)':'var(--panel-mid)'};color:${i===currentIdx?'var(--electric-light)':'var(--text-soft)'};font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:700;cursor:pointer;">${i+1}</button>`
+  ).join('');
+}
+
+// ── GENERAL SAVE
+function save() {
+  clearTimeout(window._saveTimer);
+  window._saveTimer = setTimeout(() => {
+    const misc = {};
+    ['w_q_list','w_q_map','w_q_ask'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) misc[id] = el.value;
+    });
+    // save checkboxes
+    const checks = [];
+    document.querySelectorAll('.cbox').forEach(b => checks.push(b.classList.contains('on')));
+    misc['_checks'] = checks;
+    localStorage.setItem('pat_ip_misc', JSON.stringify(misc));
+    updatePct();
+    showToast();
+  }, 700);
+}
+
+// ── CHECKBOXES
+function chk(el) {
+  el.classList.toggle('on');
+  el.textContent = el.classList.contains('on') ? '✓' : '';
+  save();
+}
+
+// ── PROGRESS %
+function updatePct() {
+  const boxes = document.querySelectorAll('.cbox');
+  const on = document.querySelectorAll('.cbox.on').length;
+  const pct = boxes.length ? Math.round((on / boxes.length) * 100) : 0;
+  document.getElementById('check-pct').textContent = pct + '%';
+}
+
+// ── TOAST
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1600);
+}
+
+// ── LOAD ON INIT
+function loadAll() {
+  if(stories.length === 0) stories.push({});
+  loadStory(0);
+  document.getElementById('story-count').textContent = stories.filter(x=>x.st_title).length;
+  try {
+    const misc = JSON.parse(localStorage.getItem('pat_ip_misc') || '{}');
+    ['w_q_list','w_q_map','w_q_ask'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el && misc[id]) el.value = misc[id];
+    });
+    const checks = misc['_checks'] || [];
+    const boxes = document.querySelectorAll('.cbox');
+    checks.forEach((on,i) => {
+      if(on && boxes[i]) { boxes[i].classList.add('on'); boxes[i].textContent='✓'; }
+    });
+  } catch(e) {}
+  updatePct();
+}
+loadAll();
+</script>
+</body>
+</html>
