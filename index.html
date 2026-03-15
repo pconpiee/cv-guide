@@ -3,140 +3,634 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pat's Career Toolkit</title>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Career Toolkit — Pat</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink: #141414;
-  --paper: #faf9f7;
-  --accent: #b84c1e;
-  --line: #ddd8ce;
+  --cream: #faf7f2;
+  --warm-white: #f5f0e8;
+  --parchment: #ede5d4;
+  --sand: #d4c9b0;
+  --bark: #5c4a32;
+  --coal: #2a2118;
+  --coal2: #1a1410;
+  --ember: #c45c2a;
+  --ember-soft: #e8956a;
+  --smoke: #9a9080;
+  --sage: #6b7c5c;
+  --radius: 4px;
+  --shadow: rgba(42,33,24,0.08);
+  --shadow-deep: rgba(42,33,24,0.18);
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--paper);
-  color: var(--ink);
-  margin: 0;
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--coal);min-height:100vh;overflow-x:hidden;}
+
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.022;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;}
+
+/* ── NAV ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,247,242,0.93);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--parchment);
+  padding: 0.9rem 2rem;
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.hub-container {
-  max-width: 900px;
-  width: 100%;
-  padding: 2rem;
+.nav-home {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--smoke);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.15s;
+  font-style: italic;
+}
+.nav-home:hover { color: var(--ember); }
+.nav-home::before { content: '←'; font-style: normal; font-size: 0.85rem; }
+
+.nav-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--coal);
+}
+.nav-title em { font-style: italic; color: var(--ember); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--coal);
+  padding: 6rem 2rem 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse at bottom, rgba(92,74,50,0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ember-soft);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.2s forwards;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 300;
+  line-height: 0.95;
+  color: var(--warm-white);
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.35s forwards;
+}
+.hero-title em { font-style: italic; color: var(--ember-soft); }
+
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(250,247,242,0.45);
+  max-width: 480px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.5s forwards;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.65s forwards;
+}
+
+.stat {
   text-align: center;
 }
 
-header {
-  margin-bottom: 4rem;
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ember-soft);
+  line-height: 1;
+  margin-bottom: 0.25rem;
 }
 
-h1 {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 3rem;
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.25);
+}
+
+/* ── TOOLS ── */
+.tools-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.tools-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--parchment);
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.tool-card {
+  background: var(--warm-white);
+  border: 1px solid var(--parchment);
+  border-radius: 8px;
+  padding: 2rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s;
+  border-top: 3px solid var(--bark);
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 35px var(--shadow-deep);
+  border-top-color: var(--ember);
+}
+
+.tool-card.coming {
+  opacity: 0.55;
+  cursor: default;
+  border-top-color: var(--sand);
+}
+
+.tool-card.coming:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.tool-icon {
+  font-size: 1.5rem;
   margin-bottom: 1rem;
+  line-height: 1;
 }
 
-h1 span { color: var(--accent); }
+.tool-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--coal);
+  margin-bottom: 0.4rem;
+}
 
-.subtitle {
-  color: #6e6e6e;
-  font-size: 1.1rem;
-  max-width: 600px;
+.tool-desc {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--smoke);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.tool-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.tool-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  background: var(--parchment);
+  color: var(--smoke);
+  border-radius: 2px;
+}
+
+.tool-cta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bark);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.15s, gap 0.15s;
+}
+
+.tool-card:hover .tool-cta { color: var(--ember); gap: 0.7rem; }
+.tool-card.coming .tool-cta { color: var(--sand); }
+
+/* ── THE DEEPER QUESTION ── */
+.deeper {
+  background: var(--coal);
+  margin: 0 2rem 5rem;
+  border-radius: 10px;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.deeper::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle at top right, rgba(196,92,42,0.15), transparent 65%);
+  pointer-events: none;
+}
+
+.deeper-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ember-soft);
+  margin-bottom: 0.75rem;
+}
+
+.deeper-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--warm-white);
+  margin-bottom: 0.75rem;
+}
+
+.deeper-title em { font-style: italic; color: var(--ember-soft); }
+
+.deeper-body {
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(250,247,242,0.45);
+  max-width: 480px;
+}
+
+.deeper-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.deeper-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.25rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.deeper-link.primary {
+  background: var(--ember);
+  color: var(--warm-white);
+}
+.deeper-link.primary:hover {
+  background: var(--ember-soft);
+  transform: translateY(-1px);
+}
+
+.deeper-link.ghost {
+  border: 1px solid rgba(250,247,242,0.15);
+  color: rgba(250,247,242,0.5);
+}
+.deeper-link.ghost:hover {
+  border-color: rgba(250,247,242,0.35);
+  color: rgba(250,247,242,0.8);
+}
+
+/* ── HOW IT WORKS ── */
+.how-section {
+  background: var(--parchment);
+  padding: 5rem 2rem;
+}
+
+.how-inner {
+  max-width: 780px;
   margin: 0 auto;
 }
 
-.grid {
+.how-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.how-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 300;
+  color: var(--coal);
+  margin-bottom: 0.5rem;
+}
+.how-title em { font-style: italic; color: var(--ember); }
+
+.how-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--smoke);
+}
+
+.how-steps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0;
+  position: relative;
 }
 
-.card {
-  background: white;
-  padding: 2.5rem;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.3s ease;
+.how-steps::before {
+  content: '';
+  position: absolute;
+  top: 2rem; left: 2rem; right: 2rem;
+  height: 1px;
+  background: linear-gradient(to right, var(--sand), var(--ember), var(--sand));
+  opacity: 0.4;
+}
+
+.how-step {
+  padding: 0 1.5rem 0;
+  text-align: center;
+  position: relative;
+}
+
+.how-step-dot {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--warm-white);
+  border: 2px solid var(--ember);
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  position: relative;
+  z-index: 1;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+.how-step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ember);
 }
 
-.icon {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+.how-step-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--coal);
+  margin-bottom: 0.4rem;
 }
 
-.card h2 {
-  font-family: 'Libre Baskerville', serif;
-  margin-bottom: 1rem;
-  font-size: 1.4rem;
-}
-
-.card p {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: #555;
-  margin-bottom: 1.5rem;
-}
-
-.btn {
-  font-weight: 600;
+.how-step-desc {
   font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--accent);
+  font-weight: 300;
+  color: var(--smoke);
+  line-height: 1.6;
 }
 
-@media (max-width: 600px) {
-  h1 { font-size: 2rem; }
+/* ── FOOTER ── */
+.footer {
+  background: var(--coal2);
+  padding: 3rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(250,247,242,0.05);
+}
+
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(250,247,242,0.3);
+  margin-bottom: 1.25rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.2);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-link:hover { color: var(--ember-soft); }
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:640px){
+  .deeper{grid-template-columns:1fr;text-align:center;}
+  .deeper-links{flex-direction:row;justify-content:center;}
+  .how-steps::before{display:none;}
 }
 </style>
 </head>
 <body>
 
-<div class="hub-container">
-  <header>
-    <h1>Pat's <span>Career</span> Toolkit</h1>
-    <p class="subtitle">A collection of resources to help you navigate the job market, from first draft to final offer.</p>
-  </header>
+<!-- ── NAV ── -->
+<nav class="nav">
+  <a href="https://pconpiee.github.io/" class="nav-home">Home</a>
+  <div class="nav-title">Career <em>Toolkit</em></div>
+  <div style="width:80px"></div>
+</nav>
 
-  <div class="grid">
-    <a href="cv-guide.html" class="card">
-      <div class="icon">📄</div>
-      <h2>The CV Guide</h2>
-      <p>Master the ATS, refine your bullet points, and build a resume that actually gets noticed by recruiters.</p>
-      <div class="btn">Open Guide →</div>
+<!-- ── HERO ── */
+<section class="hero">
+  <p class="hero-eyebrow">Articulate Yourself · Room II</p>
+  <h1 class="hero-title">Get in the <em>room.</em></h1>
+  <p class="hero-sub">The CV that clears the filter. The interview you actually own. The story that lands.</p>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">6s</div>
+      <div class="stat-label">Average recruiter scan</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">75%</div>
+      <div class="stat-label">CVs rejected by ATS</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">250+</div>
+      <div class="stat-label">Applicants per role</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3&times;</div>
+      <div class="stat-label">More callbacks with metrics</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TOOLS ── -->
+<div class="tools-section">
+  <p class="tools-label">The Tools</p>
+
+  <div class="tools-grid">
+
+    <a href="cv-guide.html" class="tool-card">
+      <div class="tool-icon">📄</div>
+      <div class="tool-name">CV Guide</div>
+      <div class="tool-desc">Master the ATS filter, write bullets that prove impact, and build a CV that gets read in the first six seconds. Covers structure, formatting, metrics, pitfalls, and special situations.</div>
+      <div class="tool-tags">
+        <span class="tool-tag">ATS</span>
+        <span class="tool-tag">Bullets</span>
+        <span class="tool-tag">Format</span>
+        <span class="tool-tag">Metrics</span>
+      </div>
+      <div class="tool-cta">Open Guide →</div>
     </a>
 
-    <a href="interview-prep.html" class="card">
-      <div class="icon">🎙️</div>
-      <h2>Interview Prep</h2>
-      <p>Strategy for behavioral questions, technical rounds, and the "So, tell me about yourself" pitch.</p>
-      <div class="btn">Get Ready →</div>
+    <a href="interview-prep.html" class="tool-card">
+      <div class="tool-icon">🎙️</div>
+      <div class="tool-name">Interview Prep</div>
+      <div class="tool-desc">Build your STAR-L story library before you need it. Map your accomplishments to common questions, practice delivery, and walk into any behavioural interview with a story already prepared.</div>
+      <div class="tool-tags">
+        <span class="tool-tag">STAR-L</span>
+        <span class="tool-tag">Behavioural</span>
+        <span class="tool-tag">Stories</span>
+      </div>
+      <div class="tool-cta">Get Ready →</div>
     </a>
 
-    <a href="#" class="card" style="opacity: 0.6; cursor: not-allowed;">
-      <div class="icon">🛠️</div>
-      <h2>CV Builder</h2>
-      <p>Coming soon: An interactive tool to generate your formatted PDF directly in the browser.</p>
-      <div class="btn">Coming Soon</div>
-    </a>
+    <div class="tool-card coming">
+      <div class="tool-icon">🛠️</div>
+      <div class="tool-name">CV Builder</div>
+      <div class="tool-desc">An interactive tool to generate your formatted PDF directly in the browser. No templates, no subscriptions — just your story, cleanly laid out and ready to send.</div>
+      <div class="tool-tags">
+        <span class="tool-tag">Coming Soon</span>
+      </div>
+      <div class="tool-cta">In Progress</div>
+    </div>
+
   </div>
 </div>
+
+<!-- ── THE DEEPER QUESTION ── -->
+<div class="deeper" style="margin-bottom:5rem;">
+  <div>
+    <div class="deeper-eyebrow">Before the CV · A Different Question</div>
+    <h2 class="deeper-title">Most people know <em>how</em> to write a bullet.<br>Few know <em>which story</em> their life is telling.</h2>
+    <p class="deeper-body">The career tools here help you articulate what you carry. But if you are not sure what you carry &mdash; or if the CV work feels hollow, like you are polishing something that does not yet feel like yours &mdash; there is somewhere else to begin. Four conversations. Twelve weeks. The question underneath the job question.</p>
+  </div>
+  <div class="deeper-links">
+    <a href="../the-table.html" class="deeper-link primary">The Table →</a>
+    <a href="../the-way.html" class="deeper-link ghost">The Way →</a>
+  </div>
+</div>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-section">
+  <div class="how-inner">
+    <div class="how-header">
+      <h2 class="how-title">How to use this <em>toolkit</em></h2>
+      <p class="how-sub">In order, or wherever you are in the process.</p>
+    </div>
+
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-dot"><span class="how-step-num">1</span></div>
+        <div class="how-step-title">Know your story</div>
+        <div class="how-step-desc">Use the Career Folder method to collect your work — projects, impact, metrics — before you write a single bullet.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-dot"><span class="how-step-num">2</span></div>
+        <div class="how-step-title">Write the CV</div>
+        <div class="how-step-desc">Use the CV Guide to structure, format, and sharpen every bullet until it proves something rather than describes something.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-dot"><span class="how-step-num">3</span></div>
+        <div class="how-step-title">Build your stories</div>
+        <div class="how-step-desc">Use Interview Prep to map your best accomplishments to common questions — before the interview, not during it.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-dot"><span class="how-step-num">4</span></div>
+        <div class="how-step-title">Practice out loud</div>
+        <div class="how-step-desc">Record yourself. Three times minimum. The first time you read it. The third time you own it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-brand">Part of Pat&rsquo;s toolkit &mdash; I see you. Your story isn&rsquo;t finished.</div>
+  <div class="footer-links">
+    <a href="https://pconpiee.github.io/" class="footer-link">← Home</a>
+    <a href="cv-guide.html" class="footer-link">CV Guide</a>
+    <a href="interview-prep.html" class="footer-link">Interview Prep</a>
+    <a href="../the-table.html" class="footer-link">The Table</a>
+    <a href="../the-way.html" class="footer-link">The Way</a>
+    <a href="https://pconpiee.github.io/TICOS/" class="footer-link">TICOS</a>
+  </div>
+</footer>
 
 </body>
 </html>
